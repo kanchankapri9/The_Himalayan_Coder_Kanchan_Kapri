@@ -1,11 +1,8 @@
-# -The_Himalayan_Coder_Kanchan_Kapri
-
-
 ## Kalpathon Hackathon Submission
 
 * Team Name
 
-[Your Team Name]
+The_Himalayan_Coder
 
 * Project Name
 
@@ -21,14 +18,13 @@
 
 * Team Leader
 
-Name: [Leader Name]
-Phone: [Phone Number]
+Name: Kanchan Kapri
+Phone: 7055638703
 
 * Team Members & Roles
-Name	Role
-[Member 1 Name]	[Role – e.g., Frontend Developer]
-[Member 2 Name]	[Role – Backend Developer]
-[Member 3 Name]	[Role – AI/ML Engineer]
+Name                   	Role
+Junaid Khan 	[Role – e.g., Frontend Developer]
+
 
  * Project Description
 
