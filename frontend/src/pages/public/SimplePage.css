@@ -1,0 +1,17 @@
+.simple-page {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.simple-page__title {
+  color: #ffffff;
+  margin-bottom: 0.8rem !important;
+}
+
+.simple-page__description {
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.65);
+}
