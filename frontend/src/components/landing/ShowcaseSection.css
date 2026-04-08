@@ -1,0 +1,80 @@
+.showcase-section {
+  padding: 2rem 0 4rem;
+}
+
+.showcase-section__visual {
+  position: relative;
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+}
+
+.showcase-section__shape {
+  position: absolute;
+  width: 240px;
+  height: 110px;
+  background: #b8c0ff;
+}
+
+.showcase-section__shape--left {
+  top: 78px;
+  left: 12%;
+}
+
+.showcase-section__shape--right {
+  bottom: 50px;
+  right: 12%;
+}
+
+.showcase-section__card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 520px);
+  padding: 1.8rem;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #202020 0%, #181818 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.28);
+}
+
+.showcase-section__card-tag {
+  color: #b8c0ff;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem !important;
+}
+
+.showcase-section__card-title {
+  color: #ffffff;
+  font-size: 1.45rem !important;
+  margin-bottom: 0.8rem !important;
+}
+
+.showcase-section__card-text {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.92rem !important;
+  line-height: 1.8 !important;
+}
+
+@media (max-width: 768px) {
+  .showcase-section__visual {
+    min-height: 300px;
+  }
+
+  .showcase-section__shape {
+    width: 120px;
+    height: 64px;
+  }
+
+  .showcase-section__shape--left {
+    left: 0;
+    top: 70px;
+  }
+
+  .showcase-section__shape--right {
+    right: 0;
+    bottom: 48px;
+  }
+}

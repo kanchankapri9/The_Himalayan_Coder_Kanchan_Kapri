@@ -1,0 +1,121 @@
+.landing-hero {
+  position: relative;
+  min-height: 88vh;
+  border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-image:
+    linear-gradient(180deg, rgba(12, 12, 12, 0.32) 0%, rgba(12, 12, 12, 0.74) 58%, rgba(12, 12, 12, 0.9) 100%),
+    url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.landing-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 26%),
+    linear-gradient(135deg, rgba(186, 192, 255, 0.18), transparent 34%);
+}
+
+.landing-hero__content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 760px);
+  text-align: center;
+}
+
+.landing-hero__chip {
+  margin-bottom: 1rem !important;
+  height: 32px !important;
+  color: var(--color-heading) !important;
+  background: var(--color-overlay-strong) !important;
+  border: 1px solid var(--color-border);
+}
+
+.landing-hero__meta {
+  margin-bottom: 1rem !important;
+  color: var(--color-muted);
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+}
+
+.landing-hero__title {
+  margin-bottom: 1rem !important;
+  color: var(--color-heading);
+  font-size: clamp(2.4rem, 7vw, 4.8rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.06em !important;
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.landing-hero__description {
+  max-width: 680px;
+  margin: 0 auto 1.6rem !important;
+  color: var(--color-muted);
+  font-size: 0.95rem !important;
+  line-height: 1.8 !important;
+}
+
+.landing-hero__actions {
+  justify-content: center;
+}
+
+.landing-hero .MuiButton-root {
+  min-width: 165px;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.87rem;
+  font-weight: 700;
+  text-transform: none;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.landing-hero__secondary {
+  color: var(--color-heading) !important;
+  border-color: var(--color-border) !important;
+  background: var(--color-overlay) !important;
+}
+
+.landing-hero .MuiButton-contained {
+  box-shadow: 0 0 0 rgba(184, 192, 255, 0);
+  animation: heroCtaPulse 2.8s ease-in-out infinite;
+}
+
+.landing-hero .MuiButton-root:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.landing-hero .MuiButton-contained:hover {
+  box-shadow: 0 12px 32px rgba(184, 192, 255, 0.28);
+}
+
+@keyframes heroCtaPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(184, 192, 255, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(184, 192, 255, 0.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-hero {
+    min-height: 78vh;
+    border-radius: 24px;
+  }
+
+  .landing-hero__title {
+    font-size: 2.3rem !important;
+  }
+}

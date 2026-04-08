@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --page-max-width: 1280px;
+  --color-page-start: #161616;
+  --color-page-mid: #1d1d1f;
+  --color-page-end: #171717;
+  --color-surface: #202022;
+  --color-surface-2: #242736;
+  --color-text: #f6f7fb;
+  --color-heading: #ffffff;
+  --color-muted: rgba(255, 255, 255, 0.62);
+  --color-primary: #b8c0ff;
+  --color-primary-strong: #dce0ff;
+  --color-secondary: #ffffff;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-overlay: rgba(255, 255, 255, 0.04);
+  --color-overlay-strong: rgba(255, 255, 255, 0.08);
+  --color-navbar: rgba(18, 18, 18, 0.72);
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme='light'] {
+  --color-page-start: #eef1ff;
+  --color-page-mid: #f7f8ff;
+  --color-page-end: #f2f4ff;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef1ff;
+  --color-text: #181c28;
+  --color-heading: #181c28;
+  --color-muted: rgba(24, 28, 40, 0.68);
+  --color-primary: #5b67d8;
+  --color-primary-strong: #4956ca;
+  --color-secondary: #181c28;
+  --color-border: rgba(91, 103, 216, 0.14);
+  --color-overlay: rgba(91, 103, 216, 0.05);
+  --color-overlay-strong: rgba(91, 103, 216, 0.12);
+  --color-navbar: rgba(255, 255, 255, 0.78);
+  --shadow-soft: 0 18px 45px rgba(64, 74, 130, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: linear-gradient(180deg, var(--color-page-start) 0%, var(--color-page-mid) 40%, var(--color-page-end) 100%);
+  color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+#root {
+  min-height: 100vh;
+}

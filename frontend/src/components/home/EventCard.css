@@ -1,0 +1,107 @@
+.event-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--color-overlay);
+  border: 1px solid var(--color-border);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
+  border-color: color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+  background: color-mix(in srgb, var(--color-overlay) 80%, var(--color-primary) 8%);
+}
+
+.event-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.04) 100%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+
+.event-card:hover::after {
+  opacity: 1;
+}
+
+.event-card__image {
+  height: 190px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.35s ease;
+}
+
+.event-card:hover .event-card__image {
+  transform: scale(1.05);
+}
+
+.event-card__overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.event-card__overlay-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.event-card__body {
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+}
+
+.event-card__date,
+.event-card__location {
+  color: var(--color-muted);
+  font-size: 0.82rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.event-card__title {
+  color: var(--color-heading);
+  font-size: 1rem !important;
+  margin: 0.55rem 0 !important;
+  transition: color 0.24s ease;
+}
+
+.event-card:hover .event-card__title {
+  color: var(--color-primary-strong);
+}
+
+.event-card__price {
+  margin-top: 0.75rem !important;
+  color: var(--color-primary);
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+}
+
+.event-card__actions {
+  margin-top: 0.9rem;
+  position: relative;
+  z-index: 3;
+}
+
+.event-card__button {
+  border-radius: 12px !important;
+  text-transform: none !important;
+  font-weight: 700 !important;
+}
+
+.event-card__link-button {
+  color: var(--color-text) !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+}

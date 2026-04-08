@@ -1,0 +1,40 @@
+.numbers-section {
+  padding: 1rem 0 4rem;
+  text-align: center;
+}
+
+.numbers-section__eyebrow {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.88rem;
+}
+
+.numbers-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.numbers-section__item {
+  padding: 1rem;
+}
+
+.numbers-section__item h3 {
+  margin: 0;
+  color: #b8c0ff;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  line-height: 0.9;
+  font-family: 'Montserrat', 'Gotham', sans-serif;
+}
+
+.numbers-section__item p {
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .numbers-section__grid {
+    grid-template-columns: 1fr;
+  }
+}

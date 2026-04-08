@@ -1,0 +1,70 @@
+.auth-form {
+  max-width: 430px;
+}
+
+.auth-form__switch {
+  margin-bottom: 1.3rem !important;
+  color: var(--color-muted);
+  font-size: 0.9rem !important;
+}
+
+.auth-form__switch a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.auth-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.auth-form .MuiFormControl-root .MuiOutlinedInput-root {
+  border-radius: 14px;
+  background: var(--color-overlay);
+}
+
+.auth-form .MuiInputLabel-root,
+.auth-form .MuiOutlinedInput-input {
+  color: var(--color-text) !important;
+}
+
+.auth-form .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-border) !important;
+}
+
+.auth-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: color-mix(in srgb, var(--color-primary) 48%, transparent) !important;
+}
+
+.auth-form .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 1px !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.auth-form__actions {
+  display: block;
+  margin-top: 0.6rem;
+}
+
+.auth-form__primary-button {
+  width: 100%;
+  border-radius: 999px !important;
+  padding: 0.8rem 1rem !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+}
+
+.auth-form__primary-button {
+  background: linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary) 100%) !important;
+  color: #171717 !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+@media (max-width: 640px) {
+  .auth-form__row {
+    grid-template-columns: 1fr;
+  }
+}
