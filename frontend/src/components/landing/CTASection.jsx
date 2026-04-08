@@ -13,10 +13,10 @@ function CTASection() {
         Start with a simple frontend and grow it into a complete event booking experience.
       </Typography>
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
-        <Button variant="contained" component={Link} to="/register">
+        <Button variant="contained" component={Link} to="/home">
           Get Started
         </Button>
-        <Button variant="outlined" component={Link} to="/explore" className="cta-section__secondary">
+        <Button variant="outlined" component={Link} to="/home" className="cta-section__secondary">
           Explore Demo Flow
         </Button>
       </Stack>

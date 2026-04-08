@@ -34,11 +34,11 @@ function HeroSection() {
         </Typography>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} className="landing-hero__actions">
-          <Button variant="contained" component={Link} to="/explore" endIcon={<FontAwesomeIcon icon={faArrowRight} />}>
-            Explore Events
-          </Button>
-          <Button variant="outlined" component={Link} to="/register" className="landing-hero__secondary">
+          <Button variant="contained" component={Link} to="/home" endIcon={<FontAwesomeIcon icon={faArrowRight} />}>
             Get Started
+          </Button>
+          <Button variant="outlined" component={Link} to="/home" className="landing-hero__secondary">
+            Explore Events
           </Button>
         </Stack>
       </div>

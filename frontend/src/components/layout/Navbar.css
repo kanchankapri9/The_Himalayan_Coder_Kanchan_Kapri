@@ -1,6 +1,6 @@
 .navbar {
-  background: rgba(18, 18, 18, 0.72) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-navbar) !important;
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(14px);
   box-shadow: none !important;
 }
@@ -17,15 +17,29 @@
 }
 
 .navbar__title {
-  color: #ffffff;
+  color: var(--color-heading);
   font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif !important;
   font-size: 1.65rem !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
 }
 
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar__theme-toggle {
+  width: 40px;
+  height: 40px;
+  color: var(--color-heading) !important;
+  background: var(--color-overlay) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
 .navbar__button {
-  background: linear-gradient(135deg, #ffffff 0%, #c9d1ff 100%) !important;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary-strong) 100%) !important;
   color: #121212 !important;
   border-radius: 999px !important;
   padding: 0.65rem 1.25rem !important;
@@ -41,7 +55,13 @@
 
 .navbar__button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(201, 209, 255, 0.22);
+  box-shadow: var(--shadow-soft);
+}
+
+.navbar__text-button {
+  color: var(--color-text) !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
 }
 
 @media (max-width: 640px) {

@@ -13,7 +13,7 @@ function LandingPage() {
       <BrandStrip />
       <ShowcaseSection />
       <FeatureSection />
-      <NumbersSection />
+      {/* <NumbersSection /> */}
       <CTASection />
     </div>
   )

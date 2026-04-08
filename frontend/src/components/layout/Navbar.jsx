@@ -1,8 +1,16 @@
-import { Link } from 'react-router-dom'
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material'
+import { Link, useLocation } from 'react-router-dom'
+import { AppBar, Button, Container, IconButton, Stack, Toolbar, Typography } from '@mui/material'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { useThemeMode } from '../../context/ThemeModeContext'
 import './Navbar.css'
 
 function Navbar() {
+  const location = useLocation()
+  const { mode, toggleMode } = useThemeMode()
+  const isLandingPage = location.pathname === '/'
+  const isHomePage = location.pathname === '/home'
+
   return (
     <AppBar position="sticky" elevation={0} className="navbar">
       <Container maxWidth="xl">
@@ -11,9 +19,43 @@ function Navbar() {
             <Typography className="navbar__title">FestFlow</Typography>
           </Link>
 
-          <Button variant="contained" component={Link} to="/register" className="navbar__button">
-            Get Started
-          </Button>
+          <div className="navbar__actions">
+            <IconButton
+              onClick={toggleMode}
+              className="navbar__theme-toggle"
+              aria-label="Toggle dark and light mode"
+            >
+              <FontAwesomeIcon icon={mode === 'dark' ? faSun : faMoon} />
+            </IconButton>
+
+          {isLandingPage && (
+            <Button variant="contained" component={Link} to="/home" className="navbar__button">
+              Get Started
+            </Button>
+          )}
+
+          {isHomePage && (
+            <Stack direction="row" spacing={1.2}>
+              <Button variant="text" component={Link} to="/login" className="navbar__text-button">
+                Log in
+              </Button>
+              <Button variant="contained" component={Link} to="/register" className="navbar__button">
+                Sign up
+              </Button>
+            </Stack>
+          )}
+
+          {!isLandingPage && !isHomePage && (
+            <Stack direction="row" spacing={1.2}>
+              <Button variant="text" component={Link} to="/home" className="navbar__text-button">
+                Home
+              </Button>
+              <Button variant="contained" component={Link} to="/register" className="navbar__button">
+                Sign up
+              </Button>
+            </Stack>
+          )}
+          </div>
         </Toolbar>
       </Container>
     </AppBar>

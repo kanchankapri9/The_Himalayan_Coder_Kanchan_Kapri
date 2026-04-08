@@ -1,4 +1,5 @@
 .landing-page {
   display: grid;
   gap: 0;
+  padding-bottom: 2rem;
 }

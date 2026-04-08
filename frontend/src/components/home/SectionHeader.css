@@ -1,0 +1,19 @@
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.2rem;
+}
+
+.section-header__label {
+  color: var(--color-primary);
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase;
+}
+
+.section-header__title {
+  color: var(--color-heading);
+  font-size: 1.7rem !important;
+}

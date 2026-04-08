@@ -8,7 +8,7 @@
 
 .section-intro__label {
   margin-bottom: 0.5rem !important;
-  color: #b8c0ff;
+  color: var(--color-primary);
   font-size: 0.72rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.18em !important;
@@ -17,14 +17,14 @@
 
 .section-intro__title {
   margin-bottom: 0.85rem !important;
-  color: #f8f8fb;
+  color: var(--color-heading);
   font-size: clamp(1.9rem, 3vw, 2.8rem) !important;
   line-height: 1 !important;
 }
 
 .section-intro__description {
   max-width: 700px;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--color-muted);
   font-size: 0.94rem !important;
   line-height: 1.75 !important;
 }

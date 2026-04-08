@@ -1,0 +1,22 @@
+.quick-categories {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.2rem;
+}
+
+.quick-categories__chip {
+  padding: 0.72rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.86);
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.quick-categories__chip:hover {
+  transform: translateY(-2px);
+  background: rgba(184, 192, 255, 0.12);
+}

@@ -32,14 +32,14 @@
 .landing-hero__chip {
   margin-bottom: 1rem !important;
   height: 32px !important;
-  color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--color-heading) !important;
+  background: var(--color-overlay-strong) !important;
+  border: 1px solid var(--color-border);
 }
 
 .landing-hero__meta {
   margin-bottom: 1rem !important;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--color-muted);
   font-size: 0.75rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.16em !important;
@@ -47,7 +47,7 @@
 
 .landing-hero__title {
   margin-bottom: 1rem !important;
-  color: #ffffff;
+  color: var(--color-heading);
   font-size: clamp(2.4rem, 7vw, 4.8rem) !important;
   line-height: 0.95 !important;
   letter-spacing: -0.06em !important;
@@ -57,7 +57,7 @@
 .landing-hero__description {
   max-width: 680px;
   margin: 0 auto 1.6rem !important;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-muted);
   font-size: 0.95rem !important;
   line-height: 1.8 !important;
 }
@@ -81,9 +81,9 @@
 }
 
 .landing-hero__secondary {
-  color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--color-heading) !important;
+  border-color: var(--color-border) !important;
+  background: var(--color-overlay) !important;
 }
 
 .landing-hero .MuiButton-contained {

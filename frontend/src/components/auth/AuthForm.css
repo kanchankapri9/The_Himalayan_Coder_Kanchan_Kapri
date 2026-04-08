@@ -4,12 +4,12 @@
 
 .auth-form__switch {
   margin-bottom: 1.3rem !important;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--color-muted);
   font-size: 0.9rem !important;
 }
 
 .auth-form__switch a {
-  color: #b8c0ff;
+  color: var(--color-primary);
   font-weight: 600;
 }
 
@@ -21,26 +21,26 @@
 
 .auth-form .MuiFormControl-root .MuiOutlinedInput-root {
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-overlay);
 }
 
 .auth-form .MuiInputLabel-root,
 .auth-form .MuiOutlinedInput-input {
-  color: rgba(255, 255, 255, 0.82) !important;
+  color: var(--color-text) !important;
 }
 
 .auth-form .MuiOutlinedInput-notchedOutline {
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--color-border) !important;
 }
 
 .auth-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: rgba(184, 192, 255, 0.48) !important;
+  border-color: color-mix(in srgb, var(--color-primary) 48%, transparent) !important;
 }
 
 .auth-form .Mui-focused .MuiOutlinedInput-notchedOutline {
   border-width: 1px !important;
-  border-color: #b8c0ff !important;
-  box-shadow: 0 0 0 4px rgba(184, 192, 255, 0.1);
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
 .auth-form__actions {
@@ -58,9 +58,9 @@
 }
 
 .auth-form__primary-button {
-  background: linear-gradient(135deg, #dce0ff 0%, #b8c0ff 100%) !important;
+  background: linear-gradient(135deg, var(--color-primary-strong) 0%, var(--color-primary) 100%) !important;
   color: #171717 !important;
-  box-shadow: 0 12px 30px rgba(184, 192, 255, 0.22) !important;
+  box-shadow: var(--shadow-soft) !important;
 }
 
 @media (max-width: 640px) {

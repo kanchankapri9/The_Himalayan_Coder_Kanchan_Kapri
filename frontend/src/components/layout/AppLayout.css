@@ -1,8 +1,8 @@
 .app-layout {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(186, 192, 255, 0.1), transparent 24%),
-    linear-gradient(180deg, #161616 0%, #1d1d1f 42%, #171717 100%);
+    radial-gradient(circle at top, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 24%),
+    linear-gradient(180deg, var(--color-page-start) 0%, var(--color-page-mid) 42%, var(--color-page-end) 100%);
 }
 
 .app-layout__main {
