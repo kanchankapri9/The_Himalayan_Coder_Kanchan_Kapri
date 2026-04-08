@@ -6,6 +6,7 @@ const {
 	updateOne,
 	deleteOne,
 } = require("../controllers/userController");
+const { validateObjectId } = require("../middleware/validateMiddleware");
 
 const router = express.Router();
 
@@ -16,6 +17,10 @@ router.route("/").get(getAll).post(createOne);
 // GET /api/users/:id -> get one user
 // PUT /api/users/:id -> update one user
 // DELETE /api/users/:id -> delete one user
-router.route("/:id").get(getOne).put(updateOne).delete(deleteOne);
+router
+	.route("/:id")
+	.get(validateObjectId("id"), getOne)
+	.put(validateObjectId("id"), updateOne)
+	.delete(validateObjectId("id"), deleteOne);
 
 module.exports = router;

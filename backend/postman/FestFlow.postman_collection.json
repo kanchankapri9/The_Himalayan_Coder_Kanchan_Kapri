@@ -1,0 +1,305 @@
+{
+  "info": {
+    "name": "FestFlow Backend API",
+    "description": "End-to-end API flow: register -> login -> create event -> create ticket -> register -> payment -> pass -> checkin",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "register"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Organizer One\",\n  \"email\": \"organizer1@example.com\",\n  \"password\": \"StrongPass@123\",\n  \"role\": \"organizer\",\n  \"phone\": \"9999999999\",\n  \"college\": \"Fest University\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.token) pm.collectionVariables.set('token', json.token);",
+              "if (json.data && json.data.id) pm.collectionVariables.set('userId', json.data.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"organizer1@example.com\",\n  \"password\": \"StrongPass@123\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.token) pm.collectionVariables.set('token', json.token);",
+              "if (json.data && json.data.id) pm.collectionVariables.set('userId', json.data.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Create Event",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/events",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "events"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Kalpathon Tech Fest\",\n  \"description\": \"Annual innovation and coding fest\",\n  \"category\": \"tech\",\n  \"startDate\": \"2026-05-01T10:00:00.000Z\",\n  \"endDate\": \"2026-05-01T17:00:00.000Z\",\n  \"organizer\": \"{{userId}}\",\n  \"capacity\": 500\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.data && json.data._id) pm.collectionVariables.set('eventId', json.data._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Create Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/tickets",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "tickets"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event\": \"{{eventId}}\",\n  \"name\": \"General Pass\",\n  \"price\": 199,\n  \"currency\": \"INR\",\n  \"totalQuantity\": 300\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.data && json.data._id) pm.collectionVariables.set('ticketTypeId', json.data._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Create Registration",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registrations",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "registrations"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event\": \"{{eventId}}\",\n  \"ticketType\": \"{{ticketTypeId}}\",\n  \"registrationNumber\": \"REG-1001\",\n  \"amount\": 199,\n  \"quantity\": 1\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.data && json.data._id) pm.collectionVariables.set('registrationId', json.data._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Create Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/payments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "payments"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"registration\": \"{{registrationId}}\",\n  \"user\": \"{{userId}}\",\n  \"event\": \"{{eventId}}\",\n  \"provider\": \"razorpay\",\n  \"transactionId\": \"TXN-1001\",\n  \"amount\": 199,\n  \"status\": \"success\"\n}"
+        }
+      }
+    },
+    {
+      "name": "07 Create Pass",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/passes",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "passes"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"registration\": \"{{registrationId}}\",\n  \"event\": \"{{eventId}}\",\n  \"user\": \"{{userId}}\",\n  \"passNumber\": \"PASS-1001\",\n  \"qrCode\": \"QR-PASS-1001\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "if (json.data && json.data._id) pm.collectionVariables.set('passId', json.data._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 Create Checkin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/checkins",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "checkins"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event\": \"{{eventId}}\",\n  \"registration\": \"{{registrationId}}\",\n  \"pass\": \"{{passId}}\",\n  \"user\": \"{{userId}}\",\n  \"status\": \"success\",\n  \"gate\": \"Gate A\"\n}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "eventId",
+      "value": ""
+    },
+    {
+      "key": "ticketTypeId",
+      "value": ""
+    },
+    {
+      "key": "registrationId",
+      "value": ""
+    },
+    {
+      "key": "passId",
+      "value": ""
+    }
+  ]
+}

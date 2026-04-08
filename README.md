@@ -44,6 +44,60 @@ We developed a smart system that leverages modern technologies to provide effici
 
 ---
 
+## Backend Implementation Summary
+
+The backend is now organized into clear modules so each part has one job:
+
+- `models/` stores the MongoDB data structures for users, events, tickets, registrations, payments, passes, check-ins, saved events, notifications, and analytics.
+- `controllers/` contains the request logic for each feature.
+- `routes/` separates the API endpoints by feature.
+- `middleware/` handles authentication, role checks, validation, upload handling, ownership checks, and business-rule checks.
+- `constants/` keeps shared role and status values in one place.
+- `postman/` contains a full API flow collection for testing the system step by step.
+
+This structure makes the backend easier to read, easier to test, and easier to extend.
+
+### What the backend can now do
+
+- Register and log in users with secure JWT-based authentication.
+- Protect sensitive routes using role-based access control.
+- Create and manage events, ticket types, registrations, payments, passes, check-ins, saved events, notifications, and analytics.
+- Validate request bodies and route ids before hitting the database.
+- Enforce event and registration business rules, such as capacity and ticket availability.
+- Provide a ready-made Postman flow for end-to-end testing.
+
+### Documentation
+
+Detailed backend notes are available in `backend/docs/`, including a file-wise change log and a beginner-friendly explanation of every major step.
+
+### Backend Setup & Running
+
+1. **Install dependencies**:
+   ```bash
+   cd backend
+   npm install
+   ```
+
+2. **Configure environment**:
+   - Copy `backend/.env.example` to `backend/.env`
+   - Fill in your values:
+     - `MONGO_URI`: MongoDB connection string (local or Atlas)
+     - `JWT_SECRET`: A strong random secret (32+ characters)
+     - `CLOUDINARY_*`: Image hosting credentials (sign up at cloudinary.com)
+     - `PORT`: Server port (default 5000)
+
+3. **Start the server**:
+   ```bash
+   npm run dev
+   ```
+   Server will run on `http://localhost:5000`. Confirm with GET `/` returning `API is running...`.
+
+4. **Test the API**:
+   - Use the Hoppscotch flow guide: `backend/docs/postman/hoppscotch-flow-guide.md`
+   - Or import the Postman collection: `backend/postman/FestFlow.postman_collection.json`
+
+---
+
 ###  Key Features
 
 - 🔹 Feature 1 –  Location-Based Event Discovery – Find events happening nearby

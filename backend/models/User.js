@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { USER_ROLES } = require("../constants/enums");
 
 const userSchema = new mongoose.Schema(
   {
@@ -20,8 +21,8 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["attendee", "organizer", "admin"],
-      default: "attendee",
+      enum: Object.values(USER_ROLES),
+      default: USER_ROLES.ATTENDEE,
     },
 
     phone: {

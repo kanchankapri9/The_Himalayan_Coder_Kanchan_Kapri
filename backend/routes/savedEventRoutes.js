@@ -6,11 +6,17 @@ const {
   updateOne,
   deleteOne,
 } = require("../controllers/savedEventController");
+const { protect } = require("../middleware/authMiddleware");
+const { validateObjectId } = require("../middleware/validateMiddleware");
 
 const router = express.Router();
 
 // Saved event CRUD endpoints
-router.route("/").get(getAll).post(createOne);
-router.route("/:id").get(getOne).put(updateOne).delete(deleteOne);
+router.route("/").get(protect, getAll).post(protect, createOne);
+router
+  .route("/:id")
+  .get(protect, validateObjectId("id"), getOne)
+  .put(protect, validateObjectId("id"), updateOne)
+  .delete(protect, validateObjectId("id"), deleteOne);
 
 module.exports = router;

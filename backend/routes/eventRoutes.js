@@ -8,11 +8,13 @@ const {
 } = require("../controllers/eventController");
 const { uploadSingle } = require("../middleware/uploadMiddleware");
 const { protect } = require("../middleware/authMiddleware");
-const { authorizeRoles } = require("../middleware/roleMiddleware");
+const { authorizeRoles, USER_ROLES } = require("../middleware/roleMiddleware");
 const {
 	attachOrganizerFromAuth,
 	canManageEvent,
 } = require("../middleware/eventOwnershipMiddleware");
+const { validateObjectId, validateEventPayload } = require("../middleware/validateMiddleware");
+const { enforceEventDomainRules } = require("../middleware/domainValidationMiddleware");
 
 const router = express.Router();
 
@@ -23,8 +25,10 @@ router
 	.get(getAll)
 	.post(
 		protect,
-		authorizeRoles("organizer", "admin"),
+		authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
 		attachOrganizerFromAuth,
+		validateEventPayload(),
+		enforceEventDomainRules,
 		uploadSingle("featuredImage"),
 		createOne
 	);
@@ -34,14 +38,23 @@ router
 // DELETE /api/events/:id -> remove event by id
 router
 	.route("/:id")
-	.get(getOne)
+	.get(validateObjectId("id"), getOne)
 	.put(
 		protect,
-		authorizeRoles("organizer", "admin"),
+		authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+		validateObjectId("id"),
 		canManageEvent,
+		validateEventPayload({ partial: true }),
+		enforceEventDomainRules,
 		uploadSingle("featuredImage"),
 		updateOne
 	)
-	.delete(protect, authorizeRoles("organizer", "admin"), canManageEvent, deleteOne);
+	.delete(
+		protect,
+		authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+		validateObjectId("id"),
+		canManageEvent,
+		deleteOne
+	);
 
 module.exports = router;

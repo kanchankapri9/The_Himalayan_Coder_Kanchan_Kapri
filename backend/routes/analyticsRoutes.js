@@ -7,19 +7,39 @@ const {
   deleteOne,
 } = require("../controllers/analyticsController");
 const { protect } = require("../middleware/authMiddleware");
-const { authorizeRoles } = require("../middleware/roleMiddleware");
+const { authorizeRoles, USER_ROLES } = require("../middleware/roleMiddleware");
+const { validateObjectId } = require("../middleware/validateMiddleware");
 
 const router = express.Router();
 
 // Analytics CRUD endpoints
 router
   .route("/")
-  .get(protect, authorizeRoles("admin"), getAll)
-  .post(protect, authorizeRoles("admin"), createOne);
+  .get(protect, authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN), getAll)
+  .post(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    createOne
+  );
 router
   .route("/:id")
-  .get(protect, authorizeRoles("admin"), getOne)
-  .put(protect, authorizeRoles("admin"), updateOne)
-  .delete(protect, authorizeRoles("admin"), deleteOne);
+  .get(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    validateObjectId("id"),
+    getOne
+  )
+  .put(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    validateObjectId("id"),
+    updateOne
+  )
+  .delete(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    validateObjectId("id"),
+    deleteOne
+  );
 
 module.exports = router;
