@@ -5,7 +5,7 @@
 | Field | Details |
 |------|--------|
 | **Team Name** | The_Himalayan_Coder |
-| **Project Name** | [Your Project Name] |
+| **Project Name** | Fest_Flow |
 | **Track** | Track - 1 Web Development |
 | **Problem Statement** | PS-04 / Hyper-Local Event Ticketing Startup|
 
@@ -30,16 +30,15 @@
 ##  Project Overview
 
 ###  Problem
-Briefly explain the real-world problem you are solving.
 
-Example:  
-Many users struggle to access intelligent and personalized solutions due to lack of awareness, accessibility, or affordability.
+Many college fests, local events, and community gatherings lack a centralized platform for discovery and ticketing. Information is scattered across social media platforms like WhatsApp and Instagram, making it difficult for users to find events and for organizers to manage registrations, ticket sales, and attendance efficiently.
 
----
 
 ###  Solution
-Describe your approach and how your project solves it.
 
+We developed a hyper-local event ticketing web platform that allows users to easily discover, book, and manage nearby events such as college fests, workshops, and pop-ups.
+
+The platform also empowers organizers with tools to create events, sell tickets, track attendance, and analyze performance, all in one place—making event management seamless and scalable.
 Example:  
 We developed a smart system that leverages modern technologies to provide efficient, scalable, and user-friendly solutions.
 
@@ -47,10 +46,13 @@ We developed a smart system that leverages modern technologies to provide effici
 
 ###  Key Features
 
-- 🔹 Feature 1 – 
-- 🔹 Feature 2 –  
-- 🔹 Feature 3 –  
-- 🔹 Feature 4 –  
+- 🔹 Feature 1 –  Location-Based Event Discovery – Find events happening nearby
+- 🔹 Feature 2 –  Online Ticket Booking – Seamless and secure ticket purchasing
+- 🔹 Feature 3 –  Organizer Dashboard – Create and manage events easily
+- 🔹 Feature 4 –  QR Code Entry System – Fast and efficient check-in process
+- 🔹 Feature 5 - Event Filters & Categories – Sort by type (tech, fest, food, etc.)
+- 🔹 Feature 6 - Real-Time Analytics – Track registrations and revenue
+- 
 
 ---
 
@@ -67,10 +69,15 @@ We developed a smart system that leverages modern technologies to provide effici
 
 ### Impact
 
--  Improves efficiency and saves time  
--  Provides accessible and scalable solutions  
--  Helps users make better decisions  
--  Can be expanded for real-world large-scale use  
+- Simplifies event discovery for users
+
+- Increases visibility for college and local events
+
+- Saves time and reduces manual effort in ticket management
+
+- Encourages community engagement and participation
+
+- Scalable solution for cities and campuses across India
 
 ---
 
@@ -78,7 +85,7 @@ We developed a smart system that leverages modern technologies to provide effici
 
 | Resource | Link |
 |---------|------|
-|  Presentation | [  ] |
+|  Presentation |  |
 |  GitHub Repo |  |
 |  Demo Video | |
 
