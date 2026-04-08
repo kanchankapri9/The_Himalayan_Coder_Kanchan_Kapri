@@ -36,7 +36,7 @@ Many college fests, local events, and community gatherings lack a centralized pl
 
 ###  Solution
 
-We developed a hyper-local event ticketing web platform that allows users to easily discover, book, and manage nearby events such as college fests, workshops, and pop-ups.
+We developed a hyper-local event ticketing web platform that allows users to easily discover, book, and manage nearby events such as college fests, workshops, and pop-ups, and also it's become easy for event organiser to manage attendence and track by the dashboard.
 
 The platform also empowers organizers with tools to create events, sell tickets, track attendance, and analyze performance, all in one place—making event management seamless and scalable.
 Example:  
