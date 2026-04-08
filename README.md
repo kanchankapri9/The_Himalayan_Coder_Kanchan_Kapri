@@ -52,7 +52,7 @@ We developed a smart system that leverages modern technologies to provide effici
 - 🔹 Feature 4 –  QR Code Entry System – Fast and efficient check-in process
 - 🔹 Feature 5 - Event Filters & Categories – Sort by type (tech, fest, food, etc.)
 - 🔹 Feature 6 - Real-Time Analytics – Track registrations and revenue
-- 
+
 
 ---
 
