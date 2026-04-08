@@ -6,8 +6,8 @@
 |------|--------|
 | **Team Name** | The_Himalayan_Coder |
 | **Project Name** | [Your Project Name] |
-| **Track** | [AI/ML / Web3 / Healthcare / Sustainability / etc.] |
-| **Problem Statement** | [PS ID / Title] |
+| **Track** | Track - 1 Web Development |
+| **Problem Statement** | PS-04 / Hyper-Local Event Ticketing Startup|
 
 ---
 
@@ -15,7 +15,7 @@
 
 | Name | Role | Contact |
 |------|------|--------|
-| **Kanchan Kapri** | Team Leader / [Your Role] |  7055638703 |
+| **Kanchan Kapri** | Team Leader / Backend Developer |  7055638703 |
 
 ---
 
@@ -47,10 +47,10 @@ We developed a smart system that leverages modern technologies to provide effici
 
 ###  Key Features
 
-- 🔹 Feature 1 – Short description  
-- 🔹 Feature 2 – Short description  
-- 🔹 Feature 3 – Short description  
-- 🔹 Feature 4 – Optional but impactful  
+- 🔹 Feature 1 – 
+- 🔹 Feature 2 –  
+- 🔹 Feature 3 –  
+- 🔹 Feature 4 –  
 
 ---
 
@@ -58,11 +58,10 @@ We developed a smart system that leverages modern technologies to provide effici
 
 | Category | Technologies |
 |----------|------------|
-| **Frontend** | React.js / HTML / CSS / JavaScript |
-| **Backend** | Node.js / Express.js |
+| **Frontend** | React.js|
+| **Backend** | Node.js & Express.js |
 | **Database** | MongoDB |
-| **AI/ML** | Python / TensorFlow / Scikit-learn |
-| **Other Tools** | Git, Firebase, APIs |
+| **Other Tools** | Github |
 
 ---
 
@@ -79,9 +78,9 @@ We developed a smart system that leverages modern technologies to provide effici
 
 | Resource | Link |
 |---------|------|
-|  Presentation | [Add your PPT / Canva link] |
-|  GitHub Repo | [Your repo link] |
-|  Demo Video | [Optional but recommended] |
+|  Presentation | [  ] |
+|  GitHub Repo |  |
+|  Demo Video | |
 
 ---
 
