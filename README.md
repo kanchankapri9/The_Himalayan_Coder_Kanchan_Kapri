@@ -44,32 +44,6 @@ We developed a smart system that leverages modern technologies to provide effici
 
 ---
 
-## Backend Implementation Summary
-
-The backend is now organized into clear modules so each part has one job:
-
-- `models/` stores the MongoDB data structures for users, events, tickets, registrations, payments, passes, check-ins, saved events, notifications, and analytics.
-- `controllers/` contains the request logic for each feature.
-- `routes/` separates the API endpoints by feature.
-- `middleware/` handles authentication, role checks, validation, upload handling, ownership checks, and business-rule checks.
-- `constants/` keeps shared role and status values in one place.
-- `postman/` contains a full API flow collection for testing the system step by step.
-
-This structure makes the backend easier to read, easier to test, and easier to extend.
-
-### What the backend can now do
-
-- Register and log in users with secure JWT-based authentication.
-- Protect sensitive routes using role-based access control.
-- Create and manage events, ticket types, registrations, payments, passes, check-ins, saved events, notifications, and analytics.
-- Validate request bodies and route ids before hitting the database.
-- Enforce event and registration business rules, such as capacity and ticket availability.
-- Provide a ready-made Postman flow for end-to-end testing.
-
-### Documentation
-
-Detailed backend notes are available in `backend/docs/`, including a file-wise change log and a beginner-friendly explanation of every major step.
-
 ### Backend Setup & Running
 
 1. **Install dependencies**:
