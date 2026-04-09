@@ -1,0 +1,93 @@
+.attendee-shell {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.attendee-shell__hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.6rem;
+  border-radius: 28px;
+  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--color-primary) 20%, transparent), transparent 34%),
+    linear-gradient(135deg, var(--color-overlay) 0%, var(--color-surface) 100%);
+  box-shadow: var(--shadow-soft);
+}
+
+.attendee-shell__eyebrow {
+  color: var(--color-primary) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+}
+
+.attendee-shell__title {
+  margin-top: 0.55rem !important;
+  color: var(--color-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+  line-height: 1.04 !important;
+}
+
+.attendee-shell__description {
+  margin-top: 0.7rem !important;
+  max-width: 640px;
+  color: var(--color-muted);
+  line-height: 1.7 !important;
+}
+
+.attendee-shell__actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.attendee-shell__primary,
+.attendee-shell__secondary {
+  min-width: 150px;
+  border-radius: 14px !important;
+  text-transform: none !important;
+  font-weight: 700 !important;
+}
+
+.attendee-shell__nav {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.attendee-shell__nav-link {
+  padding: 0.78rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  background: var(--color-overlay);
+  color: var(--color-muted);
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.attendee-shell__nav-link:hover {
+  transform: translateY(-2px);
+  color: var(--color-heading);
+  border-color: color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+}
+
+.attendee-shell__nav-link--active {
+  color: var(--color-heading);
+  background: color-mix(in srgb, var(--color-primary) 13%, var(--color-overlay));
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+}
+
+.attendee-shell__content {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .attendee-shell__hero {
+    flex-direction: column;
+  }
+}

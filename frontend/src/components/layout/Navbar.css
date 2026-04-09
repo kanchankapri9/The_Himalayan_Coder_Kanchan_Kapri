@@ -65,7 +65,7 @@
 }
 
 .navbar__user-name {
-  color: var(--color-heading);
+  color: var(--color-muted);
   font-size: 0.9rem !important;
   font-weight: 600 !important;
 }

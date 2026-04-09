@@ -15,8 +15,14 @@ function LoginPage() {
     try {
       setIsSubmitting(true)
       setServerError('')
-      await login(payload)
-      navigate(location.state?.from || '/home')
+      const response = await login(payload)
+      const fallbackPath =
+        response.data?.role === 'attendee'
+          ? '/attendee/registrations'
+          : response.data?.role === 'organizer'
+            ? '/organizer'
+            : '/home'
+      navigate(location.state?.from || fallbackPath)
     } catch (error) {
       setServerError(error.response?.data?.message || 'Failed to log in.')
     } finally {
@@ -30,12 +36,7 @@ function LoginPage() {
       heading="Log in and jump back in."
       subText="Continue exploring local fests, track your registrations, and manage event check-ins from your dashboard."
     >
-      <AuthForm
-        mode="login"
-        onSubmit={handleLogin}
-        isSubmitting={isSubmitting}
-        serverError={serverError}
-      />
+      <AuthForm mode="login" onSubmit={handleLogin} isSubmitting={isSubmitting} serverError={serverError} />
     </AuthPageLayout>
   )
 }

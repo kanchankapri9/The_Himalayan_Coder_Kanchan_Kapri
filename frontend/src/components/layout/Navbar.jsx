@@ -8,10 +8,12 @@ import './Navbar.css'
 
 function Navbar() {
   const location = useLocation()
+  const { user, isAuthenticated, logout } = useAuth()
   const { mode, toggleMode } = useThemeMode()
-  const { isAuthenticated, user, logout } = useAuth()
   const isLandingPage = location.pathname === '/'
   const isHomePage = location.pathname === '/home'
+  const isAttendee = user?.role === 'attendee'
+  const isOrganizer = user?.role === 'organizer'
 
   return (
     <AppBar position="sticky" elevation={0} className="navbar">
@@ -30,13 +32,13 @@ function Navbar() {
               <FontAwesomeIcon icon={mode === 'dark' ? faSun : faMoon} />
             </IconButton>
 
-            {isLandingPage && (
+            {isLandingPage && !isAuthenticated ? (
               <Button variant="contained" component={Link} to="/home" className="navbar__button">
                 Get Started
               </Button>
-            )}
+            ) : null}
 
-            {isHomePage && !isAuthenticated && (
+            {isHomePage && !isAuthenticated ? (
               <Stack direction="row" spacing={1.2}>
                 <Button variant="text" component={Link} to="/login" className="navbar__text-button">
                   Log in
@@ -45,9 +47,9 @@ function Navbar() {
                   Sign up
                 </Button>
               </Stack>
-            )}
+            ) : null}
 
-            {!isLandingPage && !isHomePage && !isAuthenticated && (
+            {!isLandingPage && !isHomePage && !isAuthenticated ? (
               <Stack direction="row" spacing={1.2}>
                 <Button variant="text" component={Link} to="/home" className="navbar__text-button">
                   Home
@@ -56,16 +58,38 @@ function Navbar() {
                   Sign up
                 </Button>
               </Stack>
-            )}
+            ) : null}
 
-            {isAuthenticated && (
+            {isAuthenticated ? (
               <Stack direction="row" spacing={1.2} alignItems="center">
+                {isAttendee ? (
+                  <>
+                    <Button variant="text" component={Link} to="/attendee/registrations" className="navbar__text-button">
+                      Dashboard
+                    </Button>
+                    <Button variant="text" component={Link} to="/attendee/passes" className="navbar__text-button">
+                      Passes
+                    </Button>
+                  </>
+                ) : null}
+
+                {isOrganizer ? (
+                  <>
+                    <Button variant="text" component={Link} to="/organizer" className="navbar__text-button">
+                      Dashboard
+                    </Button>
+                    <Button variant="text" component={Link} to="/organizer/events" className="navbar__text-button">
+                      My Events
+                    </Button>
+                  </>
+                ) : null}
+
                 <Typography className="navbar__user-name">{user?.name}</Typography>
                 <Button variant="text" onClick={logout} className="navbar__text-button">
                   Logout
                 </Button>
               </Stack>
-            )}
+            ) : null}
           </div>
         </Toolbar>
       </Container>

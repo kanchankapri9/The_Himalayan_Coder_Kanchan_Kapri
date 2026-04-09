@@ -10,8 +10,8 @@ function EventShowcaseSection({ label, title, compact = false, items = events })
       <SectionHeader label={label} title={title} />
       <Grid container spacing={2}>
         {items.map((event) => (
-          <Grid key={`${title}-${event.title}`} size={{ xs: 12, sm: 6, lg: 3 }}>
-            <EventCard {...mapEventForCard(event)} />
+          <Grid key={`${title}-${event._id}`} size={{ xs: 12, sm: 6, lg: 3 }}>
+            <EventCard event={event} {...mapEventForCard(event)} />
           </Grid>
         ))}
       </Grid>

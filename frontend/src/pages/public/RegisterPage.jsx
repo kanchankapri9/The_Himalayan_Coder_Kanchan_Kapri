@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AuthForm from '../../components/auth/AuthForm'
 import AuthPageLayout from '../../components/auth/AuthPageLayout'
 import { useAuth } from '../../context/AuthContext'
 
 function RegisterPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { register } = useAuth()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [serverError, setServerError] = useState('')
@@ -14,8 +15,14 @@ function RegisterPage() {
     try {
       setIsSubmitting(true)
       setServerError('')
-      await register(payload)
-      navigate('/home')
+      const response = await register(payload)
+      const fallbackPath =
+        response.data?.role === 'attendee'
+          ? '/attendee/registrations'
+          : response.data?.role === 'organizer'
+            ? '/organizer'
+            : '/home'
+      navigate(location.state?.from || fallbackPath)
     } catch (error) {
       setServerError(error.response?.data?.message || 'Failed to create account.')
     } finally {
@@ -29,12 +36,7 @@ function RegisterPage() {
       heading="Create your FestFlow account."
       subText="Set up your account to explore events, save favorites, and get QR passes after registration."
     >
-      <AuthForm
-        mode="register"
-        onSubmit={handleRegister}
-        isSubmitting={isSubmitting}
-        serverError={serverError}
-      />
+      <AuthForm mode="register" onSubmit={handleRegister} isSubmitting={isSubmitting} serverError={serverError} />
     </AuthPageLayout>
   )
 }

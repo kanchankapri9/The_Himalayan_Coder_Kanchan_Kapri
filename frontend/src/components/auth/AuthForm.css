@@ -13,6 +13,11 @@
   font-weight: 600;
 }
 
+.auth-form__alert {
+  margin-bottom: 1rem !important;
+  border-radius: 14px !important;
+}
+
 .auth-form__row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

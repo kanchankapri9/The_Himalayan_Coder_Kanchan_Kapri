@@ -1,0 +1,89 @@
+.pass-hero-card {
+  display: grid;
+  grid-template-columns: 1.6fr 320px;
+  gap: 1.2rem;
+  padding: 1.4rem;
+  border-radius: 28px;
+  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--color-primary) 20%, transparent), transparent 36%),
+    linear-gradient(135deg, var(--color-overlay) 0%, var(--color-surface) 100%);
+  box-shadow: var(--shadow-soft);
+}
+
+.pass-hero-card__eyebrow {
+  color: var(--color-primary) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+}
+
+.pass-hero-card__title {
+  margin-top: 0.5rem !important;
+  color: var(--color-heading);
+  font-size: clamp(1.7rem, 4vw, 2.7rem) !important;
+}
+
+.pass-hero-card__meta {
+  margin-top: 0.45rem !important;
+  color: var(--color-muted);
+  line-height: 1.7 !important;
+}
+
+.pass-hero-card__actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.pass-hero-card__button {
+  text-transform: none !important;
+  font-weight: 700 !important;
+  border-radius: 14px !important;
+}
+
+.pass-hero-card__qr-box {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.9rem;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+  background: color-mix(in srgb, var(--color-overlay) 60%, var(--color-primary) 8%);
+}
+
+.pass-hero-card__qr-label,
+.pass-hero-card__status {
+  color: var(--color-muted) !important;
+}
+
+.pass-hero-card__qr-code {
+  width: 100%;
+  min-height: 220px;
+  border-radius: 20px;
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(220, 224, 255, 0.88)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(17, 24, 39, 0.08),
+      rgba(17, 24, 39, 0.08) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  color: #141826;
+  font-weight: 800;
+  text-align: center;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .pass-hero-card {
+    grid-template-columns: 1fr;
+  }
+}

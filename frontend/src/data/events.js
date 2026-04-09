@@ -1,272 +1,226 @@
-const mockEvents = [
+const eventSeeds = [
   {
-    _id: '680a1f000000000000000001',
-    organizer: {
-      _id: '680a1f000000000000010001',
-      name: 'NSUT Cultural Committee',
-      email: 'culture@nsut.ac.in',
-      role: 'organizer',
-    },
+    _id: 'event-demo-1',
     title: 'Tech Fest Night 2026',
     description:
-      'Tech Fest Night 2026 brings together music, creator performances, student showcases, gaming corners, and sponsor activations in one high-energy evening. The event is designed for students who want a festival-style campus experience with smooth ticketing and easy QR-based entry.',
+      'Tech Fest Night 2026 brings together music, creator performances, student showcases, gaming corners, and sponsor activations in one high-energy evening.',
     category: 'College Fest',
-    tags: ['music', 'campus', 'festival'],
     status: 'published',
     eventType: 'offline',
-    venue: {
-      _id: '680a1f000000000000020001',
-      name: 'Open Air Arena',
-      addressLine1: 'NSUT Main Campus',
-      city: 'Delhi',
-      state: 'Delhi',
-      country: 'India',
-    },
-    startDate: '2026-04-12T18:00:00.000Z',
-    endDate: '2026-04-12T23:00:00.000Z',
-    timezone: 'Asia/Kolkata',
-    capacity: 2500,
     featuredImage:
       'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80',
+    startDate: '2026-04-12T18:00:00.000Z',
+    endDate: '2026-04-12T22:30:00.000Z',
+    organizer: {
+      _id: 'org-demo-1',
+      name: 'NSUT Cultural Committee',
+      email: 'nsut@festflow.demo',
+    },
+    venue: {
+      _id: 'venue-demo-1',
+      name: 'Open Air Arena',
+      city: 'Delhi',
+      addressLine1: 'NSUT Main Campus',
+    },
+    attendeesLabel: '1.2k interested',
+    details: [
+      'Live performances by campus bands and headline DJ set',
+      'Food stalls, art installations, and gaming pop-ups',
+      'Separate early entry and general access tickets',
+      'QR-based gate entry with organizer check-in support',
+    ],
   },
   {
-    _id: '680a1f000000000000000002',
-    organizer: {
-      _id: '680a1f000000000000010002',
-      name: 'Mumbai Student Creators',
-      email: 'hello@mumbaicreators.in',
-      role: 'organizer',
-    },
+    _id: 'event-demo-2',
     title: 'Campus Music Pop-up',
     description:
-      'A free sunset pop-up where student artists, indie performers, and local youth communities come together for an open-air music experience. Designed for discovery, casual networking, and local culture.',
+      'A free sunset pop-up where student artists, indie performers, and local youth communities come together for an open-air music experience.',
     category: 'Music',
-    tags: ['pop-up', 'music', 'community'],
     status: 'published',
     eventType: 'offline',
-    venue: {
-      _id: '680a1f000000000000020002',
-      name: 'Carter Road Promenade',
-      addressLine1: 'Bandra West',
-      city: 'Mumbai',
-      state: 'Maharashtra',
-      country: 'India',
-    },
-    startDate: '2026-04-13T16:30:00.000Z',
-    endDate: '2026-04-13T21:00:00.000Z',
-    timezone: 'Asia/Kolkata',
-    capacity: 800,
     featuredImage:
       'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+    startDate: '2026-04-13T16:30:00.000Z',
+    endDate: '2026-04-13T20:00:00.000Z',
+    organizer: {
+      _id: 'org-demo-2',
+      name: 'Mumbai Student Creators',
+      email: 'mumbai@festflow.demo',
+    },
+    venue: {
+      _id: 'venue-demo-2',
+      name: 'Carter Road Promenade',
+      city: 'Mumbai',
+      addressLine1: 'Bandra West',
+    },
+    attendeesLabel: '680 interested',
+    details: [
+      'Acoustic sets, indie performances, and pop-up art corners',
+      'Free registration for quick entry management',
+      'Local brand booths and student creator stalls',
+      'Best suited for students, creators, and local communities',
+    ],
   },
   {
-    _id: '680a1f000000000000000003',
-    organizer: {
-      _id: '680a1f000000000000010003',
-      name: 'Creator Circle India',
-      email: 'team@creatorcircle.in',
-      role: 'organizer',
-    },
+    _id: 'event-demo-3',
     title: 'Community Creator Meetup',
     description:
       'A daytime meetup for designers, creators, founders, and student builders who want a practical community event with talks, collaboration spaces, and networking sessions.',
     category: 'Community',
-    tags: ['creator', 'meetup', 'networking'],
     status: 'published',
     eventType: 'offline',
-    venue: {
-      _id: '680a1f000000000000020003',
-      name: 'Studio Hall',
-      addressLine1: 'Koramangala Social Block',
-      city: 'Bengaluru',
-      state: 'Karnataka',
-      country: 'India',
-    },
-    startDate: '2026-04-18T10:00:00.000Z',
-    endDate: '2026-04-18T17:00:00.000Z',
-    timezone: 'Asia/Kolkata',
-    capacity: 300,
     featuredImage:
       'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
+    startDate: '2026-04-18T10:00:00.000Z',
+    endDate: '2026-04-18T17:00:00.000Z',
+    organizer: {
+      _id: 'org-demo-3',
+      name: 'Creator Circle India',
+      email: 'creatorcircle@festflow.demo',
+    },
+    venue: {
+      _id: 'venue-demo-3',
+      name: 'Studio Hall',
+      city: 'Bengaluru',
+      addressLine1: 'Koramangala Social Block',
+    },
+    attendeesLabel: '940 interested',
+    details: [
+      'Lightning talks from creators and startup operators',
+      'Community networking and collaboration activities',
+      'Approval-based registration for limited seating',
+      'Great fit for creator communities and startup circles',
+    ],
   },
   {
-    _id: '680a1f000000000000000004',
-    organizer: {
-      _id: '680a1f000000000000010004',
-      name: 'Pune Pop-up Collective',
-      email: 'events@punepopup.in',
-      role: 'organizer',
-    },
+    _id: 'event-demo-4',
     title: 'Street Food and Art Fair',
     description:
       'An evening fair that mixes local food brands, small art vendors, live experiences, and social meetups. Perfect for young audiences who want a low-pressure local outing with friends.',
     category: 'Food & Drink',
-    tags: ['food', 'art', 'fair'],
     status: 'published',
     eventType: 'offline',
-    venue: {
-      _id: '680a1f000000000000020004',
-      name: 'Riverside Event Lawn',
-      addressLine1: 'Pune City Center',
-      city: 'Pune',
-      state: 'Maharashtra',
-      country: 'India',
-    },
-    startDate: '2026-04-19T17:00:00.000Z',
-    endDate: '2026-04-19T22:00:00.000Z',
-    timezone: 'Asia/Kolkata',
-    capacity: 1200,
     featuredImage:
       'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=1200&q=80',
+    startDate: '2026-04-19T17:00:00.000Z',
+    endDate: '2026-04-19T22:00:00.000Z',
+    organizer: {
+      _id: 'org-demo-4',
+      name: 'Pune Pop-up Collective',
+      email: 'punepopup@festflow.demo',
+    },
+    venue: {
+      _id: 'venue-demo-4',
+      name: 'Riverside Event Lawn',
+      city: 'Pune',
+      addressLine1: 'Central Riverside Block',
+    },
+    attendeesLabel: '860 interested',
+    details: [
+      'Curated local food stalls and visual art vendors',
+      'Live acoustic performances through the evening',
+      'Family-friendly and student-friendly timing',
+      'Fast QR check-in and limited-capacity tickets',
+    ],
   },
 ]
 
-const mockTicketTypes = [
-  {
-    _id: '680a1f000000000000100001',
-    event: '680a1f000000000000000001',
-    name: 'General Access',
-    description: 'Entry from 6:00 PM onwards',
-    price: 199,
-    currency: 'INR',
-    totalQuantity: 1500,
-  },
-  {
-    _id: '680a1f000000000000100002',
-    event: '680a1f000000000000000001',
-    name: 'Early Entry Pass',
-    description: 'Priority queue and early access',
-    price: 349,
-    currency: 'INR',
-    totalQuantity: 500,
-  },
-  {
-    _id: '680a1f000000000000100003',
-    event: '680a1f000000000000000002',
-    name: 'Free Entry',
-    description: 'Registration required for QR pass',
-    price: 0,
-    currency: 'INR',
-    totalQuantity: 800,
-  },
-  {
-    _id: '680a1f000000000000100004',
-    event: '680a1f000000000000000003',
-    name: 'Standard Seat',
-    description: 'Access to talks and community mixer',
-    price: 299,
-    currency: 'INR',
-    totalQuantity: 200,
-  },
-  {
-    _id: '680a1f000000000000100005',
-    event: '680a1f000000000000000003',
-    name: 'Community Plus',
-    description: 'Priority seating and networking lounge',
-    price: 499,
-    currency: 'INR',
-    totalQuantity: 100,
-  },
-  {
-    _id: '680a1f000000000000100006',
-    event: '680a1f000000000000000004',
-    name: 'General Entry',
-    description: 'Single-day entry',
-    price: 149,
-    currency: 'INR',
-    totalQuantity: 900,
-  },
+const ticketSeeds = [
+  { _id: 'ticket-demo-1', event: 'event-demo-1', name: 'General Access', description: 'Entry from 6:00 PM onwards.', price: 199, currency: 'INR', isActive: true },
+  { _id: 'ticket-demo-2', event: 'event-demo-1', name: 'Early Entry Pass', description: 'Priority queue and early access.', price: 349, currency: 'INR', isActive: true },
+  { _id: 'ticket-demo-3', event: 'event-demo-2', name: 'Free Entry', description: 'Registration required for QR pass.', price: 0, currency: 'INR', isActive: true },
+  { _id: 'ticket-demo-4', event: 'event-demo-3', name: 'Standard Seat', description: 'Access to talks and community mixer.', price: 299, currency: 'INR', isActive: true },
+  { _id: 'ticket-demo-5', event: 'event-demo-3', name: 'Community Plus', description: 'Priority seating and networking lounge.', price: 499, currency: 'INR', isActive: true },
+  { _id: 'ticket-demo-6', event: 'event-demo-4', name: 'General Entry', description: 'Single-day entry.', price: 149, currency: 'INR', isActive: true },
+  { _id: 'ticket-demo-7', event: 'event-demo-4', name: 'Group Pass', description: 'Entry for up to 4 people.', price: 499, currency: 'INR', isActive: true },
 ]
 
-function formatDateTime(isoDate) {
-  return new Date(isoDate).toLocaleString('en-IN', {
-    weekday: 'short',
+function formatEventDate(dateValue, options = {}) {
+  return new Date(dateValue).toLocaleString('en-IN', {
     month: 'short',
     day: 'numeric',
+    weekday: 'short',
     hour: 'numeric',
     minute: '2-digit',
+    ...options,
   })
 }
 
-function formatPrice(ticketTypes) {
-  if (!ticketTypes.length) {
-    return 'Ticket details coming soon'
-  }
-
-  const prices = ticketTypes.map((ticket) => ticket.price)
-  const minPrice = Math.min(...prices)
-
-  if (minPrice === 0) {
+function formatTicketPrice(ticket) {
+  if (!ticket || ticket.price === 0) {
     return 'Free'
   }
 
-  return `From Rs. ${minPrice}`
+  return `From Rs. ${ticket.price}`
 }
 
-function formatVenue(venue) {
-  if (!venue) {
+function getEventLocation(event) {
+  if (!event?.venue) {
     return 'Venue to be announced'
   }
 
-  return `${venue.name}, ${venue.city}`
+  return `${event.venue.name}, ${event.venue.city}`
 }
 
-export const events = mockEvents
-export const ticketTypes = mockTicketTypes
+function getOrganizerName(event) {
+  return event.organizer?.name || event.organizerName || 'FestFlow Organizer'
+}
+
+export const events = eventSeeds
+export const tickets = ticketSeeds
 
 export function getTicketsByEventId(eventId) {
-  return ticketTypes.filter((ticket) => {
+  return ticketSeeds.filter((ticket) => {
     const ticketEventId = typeof ticket.event === 'string' ? ticket.event : ticket.event?._id
     return ticketEventId === eventId
   })
 }
 
 export function getEventById(eventId) {
-  return events.find((event) => event._id === eventId)
+  return eventSeeds.find((event) => event._id === eventId)
 }
 
 export function mapEventForCard(event) {
   const eventTickets = getTicketsByEventId(event._id)
+  const primaryTicket = eventTickets[0]
 
   return {
-    _id: event._id,
-    title: event.title,
+    id: event._id,
     image: event.featuredImage,
-    date: formatDateTime(event.startDate),
-    location: formatVenue(event.venue),
-    price: formatPrice(eventTickets),
+    date: formatEventDate(event.startDate),
+    title: event.title,
+    location: getEventLocation(event),
+    price: formatTicketPrice(primaryTicket),
   }
 }
 
-export function mapEventForDetails(event, providedTickets = null) {
-  const eventTickets = providedTickets || getTicketsByEventId(event._id)
+export function mapEventForDetails(event, eventTickets = getTicketsByEventId(event._id)) {
+  const primaryTicket = eventTickets[0]
 
   return {
-    _id: event._id,
-    title: event.title,
-    category: event.category,
+    id: event._id,
     image: event.featuredImage,
-    date: formatDateTime(event.startDate),
-    venue: event.venue
-      ? `${event.venue.name}, ${event.venue.addressLine1}, ${event.venue.city}, ${event.venue.state || ''}, ${event.venue.country}`
-          .replace(', ,', ',')
-      : 'Venue to be announced',
-    location: formatVenue(event.venue),
-    organizerName: event.organizer?.name || 'Organizer',
-    attendees: `${event.capacity || 0} capacity`,
+    date: formatEventDate(event.startDate, {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    }),
+    title: event.title,
+    venue: getEventLocation(event),
+    price: formatTicketPrice(primaryTicket),
+    organizerName: getOrganizerName(event),
+    attendees: event.attendeesLabel || 'Students and communities attending',
+    category: event.category || 'Event',
     about: event.description,
-    details: [
-      `${event.eventType === 'offline' ? 'Offline' : 'Online'} event experience`,
-      `Category: ${event.category}`,
-      `Status: ${event.status}`,
-      `Timezone: ${event.timezone}`,
-    ],
-    price: formatPrice(eventTickets),
+    details: event.details || [],
     tickets: eventTickets.map((ticket) => ({
       id: ticket._id,
       name: ticket.name,
+      note: ticket.description,
+      description: ticket.description,
       price: ticket.price === 0 ? 'Free' : `Rs. ${ticket.price}`,
-      note: ticket.description || 'Ticket access details will be shared after booking',
     })),
   }
 }

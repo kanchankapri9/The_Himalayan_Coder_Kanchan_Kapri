@@ -5,64 +5,117 @@ import { setAuthToken } from '../api/client'
 const AuthContext = createContext(null)
 const STORAGE_KEY = 'festflow-auth'
 
+function readStoredSession() {
+  const rawValue = localStorage.getItem(STORAGE_KEY)
+
+  if (!rawValue) {
+    return { token: '', user: null }
+  }
+
+  try {
+    const parsedValue = JSON.parse(rawValue)
+    return {
+      token: parsedValue.token || '',
+      user: parsedValue.user || null,
+    }
+  } catch {
+    localStorage.removeItem(STORAGE_KEY)
+    return { token: '', user: null }
+  }
+}
+
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem(STORAGE_KEY) || '')
-  const [user, setUser] = useState(null)
-  const [isAuthLoading, setIsAuthLoading] = useState(Boolean(localStorage.getItem(STORAGE_KEY)))
+  const [session, setSession] = useState(() => readStoredSession())
+  const [isAuthLoading, setIsAuthLoading] = useState(Boolean(readStoredSession().token))
 
   useEffect(() => {
-    setAuthToken(token)
+    if (session.token) {
+      setAuthToken(session.token)
+    } else {
+      setAuthToken('')
+    }
+  }, [session.token])
 
-    if (!token) {
-      setUser(null)
+  useEffect(() => {
+    if (!session.token) {
       setIsAuthLoading(false)
       return
     }
 
-    const loadProfile = async () => {
+    let ignore = false
+
+    const loadCurrentUser = async () => {
       try {
+        setIsAuthLoading(true)
         const response = await getCurrentUser()
-        setUser(response.data)
+
+        if (!ignore) {
+          const nextSession = {
+            token: session.token,
+            user: response.data || response.user || session.user,
+          }
+          setSession(nextSession)
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(nextSession))
+        }
       } catch {
-        localStorage.removeItem(STORAGE_KEY)
-        setToken('')
-        setUser(null)
+        if (!ignore) {
+          setSession({ token: '', user: null })
+          localStorage.removeItem(STORAGE_KEY)
+          setAuthToken('')
+        }
       } finally {
-        setIsAuthLoading(false)
+        if (!ignore) {
+          setIsAuthLoading(false)
+        }
       }
     }
 
-    loadProfile()
-  }, [token])
+    loadCurrentUser()
+
+    return () => {
+      ignore = true
+    }
+  }, [session.token])
 
   const value = useMemo(
     () => ({
-      token,
-      user,
-      isAuthenticated: Boolean(token && user),
+      user: session.user,
+      token: session.token,
+      isAuthenticated: Boolean(session.token && session.user),
       isAuthLoading,
-      async login(credentials) {
-        const response = await loginUser(credentials)
-        localStorage.setItem(STORAGE_KEY, response.token)
-        setToken(response.token)
-        setUser(response.data)
+      async login(payload) {
+        const response = await loginUser(payload)
+        const nextSession = {
+          token: response.token,
+          user: response.data || response.user,
+        }
+
+        setSession(nextSession)
+        setAuthToken(nextSession.token)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextSession))
+
         return response
       },
       async register(payload) {
         const response = await registerUser(payload)
-        localStorage.setItem(STORAGE_KEY, response.token)
-        setToken(response.token)
-        setUser(response.data)
+        const nextSession = {
+          token: response.token,
+          user: response.data || response.user,
+        }
+
+        setSession(nextSession)
+        setAuthToken(nextSession.token)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextSession))
+
         return response
       },
       logout() {
-        localStorage.removeItem(STORAGE_KEY)
-        setToken('')
-        setUser(null)
+        setSession({ token: '', user: null })
         setAuthToken('')
+        localStorage.removeItem(STORAGE_KEY)
       },
     }),
-    [token, user, isAuthLoading],
+    [isAuthLoading, session],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -1,0 +1,88 @@
+.attendee-event-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.1rem;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 88%, var(--color-overlay));
+  box-shadow: var(--shadow-soft);
+}
+
+.attendee-event-card__image {
+  min-height: 180px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+}
+
+.attendee-event-card__body {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.attendee-event-card__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.attendee-event-card__title {
+  color: var(--color-heading);
+  font-size: 1.15rem !important;
+  margin-bottom: 0.45rem !important;
+}
+
+.attendee-event-card__text {
+  color: var(--color-muted);
+  font-size: 0.9rem !important;
+  line-height: 1.7 !important;
+}
+
+.attendee-event-card__meta {
+  color: var(--color-text);
+  font-size: 0.92rem !important;
+  line-height: 1.7 !important;
+}
+
+.attendee-event-card__chip {
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+}
+
+.attendee-event-card__chip--success {
+  background: color-mix(in srgb, #35c98f 18%, transparent) !important;
+  color: #35c98f !important;
+}
+
+.attendee-event-card__chip--warning {
+  background: color-mix(in srgb, #f8c35d 18%, transparent) !important;
+  color: #f8c35d !important;
+}
+
+.attendee-event-card__chip--neutral {
+  background: color-mix(in srgb, var(--color-primary) 18%, transparent) !important;
+  color: var(--color-primary-strong) !important;
+}
+
+.attendee-event-card__actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.attendee-event-card__button,
+.attendee-event-card__link {
+  text-transform: none !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 780px) {
+  .attendee-event-card {
+    grid-template-columns: 1fr;
+  }
+
+  .attendee-event-card__top {
+    flex-direction: column;
+  }
+}

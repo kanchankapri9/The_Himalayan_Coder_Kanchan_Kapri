@@ -1,0 +1,101 @@
+.organizer-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.organizer-page__feedback {
+  border-radius: 18px !important;
+}
+
+.organizer-page__section {
+  display: grid;
+  gap: 1rem;
+}
+
+.organizer-page__empty {
+  padding: 1.6rem;
+  border-radius: 24px;
+  border: 1px dashed var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 82%, var(--color-overlay));
+  text-align: center;
+}
+
+.organizer-page__empty-title {
+  color: var(--color-heading);
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+}
+
+.organizer-page__empty-text {
+  margin-top: 0.5rem !important;
+  color: var(--color-muted);
+  max-width: 620px;
+  margin-inline: auto !important;
+  line-height: 1.7 !important;
+}
+
+.organizer-page__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.85fr;
+  gap: 1rem;
+}
+
+.organizer-page__panel {
+  padding: 1.2rem;
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-overlay));
+}
+
+.organizer-page__panel-title {
+  color: var(--color-heading);
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.8rem !important;
+}
+
+.organizer-page__line {
+  color: var(--color-muted);
+  line-height: 1.8 !important;
+}
+
+.organizer-page__ticket-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.organizer-page__ticket-item {
+  padding: 0.9rem;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  background: var(--color-overlay);
+}
+
+.organizer-page__ticket-title {
+  color: var(--color-heading);
+  font-weight: 700 !important;
+}
+
+.organizer-page__ticket-meta {
+  margin-top: 0.3rem !important;
+  color: var(--color-muted);
+}
+
+.organizer-page__actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.organizer-page__actions .MuiButton-root {
+  text-transform: none !important;
+  font-weight: 700 !important;
+  border-radius: 14px !important;
+}
+
+@media (max-width: 900px) {
+  .organizer-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
