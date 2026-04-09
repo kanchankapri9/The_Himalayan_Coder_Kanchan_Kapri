@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react'
-import { Alert, Typography } from '@mui/material'
+import { useEffect, useMemo, useState } from 'react'
+import { Alert, CircularProgress, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import OrganizerShell from '../../components/organizer/OrganizerShell'
 import OrganizerSummaryCards from '../../components/organizer/OrganizerSummaryCards'
 import RegistrationTable from '../../components/organizer/RegistrationTable'
+import { getEventRegistrations, approveRegistration, rejectRegistration } from '../../api/organizerApi'
+import { fetchEventById } from '../../api/eventApi'
+import { getApiErrorMessage } from '../../utils/apiError'
 import {
   getMockOrganizerEventById,
   getMockOrganizerRegistrations,
@@ -14,9 +17,36 @@ import './OrganizerPages.css'
 
 function ApprovalRequestsPage() {
   const { eventId } = useParams()
-  const event = getMockOrganizerEventById(eventId)
-  const [registrations, setRegistrations] = useState(() => getMockOrganizerRegistrations(eventId))
+  const [event, setEvent] = useState(null)
+  const [registrations, setRegistrations] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [actionLoading, setActionLoading] = useState(null)
   const [feedbackMessage, setFeedbackMessage] = useState('')
+  const [feedbackType, setFeedbackType] = useState('success')
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true)
+        const eventResponse = await fetchEventById(eventId)
+        setEvent(eventResponse.data || eventResponse)
+        
+        const registrationsResponse = await getEventRegistrations(eventId)
+        setRegistrations(registrationsResponse.data || [])
+      } catch (error) {
+        setEvent(getMockOrganizerEventById(eventId))
+        setRegistrations(getMockOrganizerRegistrations(eventId))
+        setFeedbackMessage(
+          `${getApiErrorMessage(error, 'Could not load approvals.')} Showing demo data instead.`,
+        )
+        setFeedbackType('warning')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadData()
+  }, [eventId])
 
   const pendingRegistrations = useMemo(
     () => registrations.filter((item) => item.status === 'pending'),
@@ -30,23 +60,36 @@ function ApprovalRequestsPage() {
 
   const summaryItems = useMemo(() => getOrganizerRegistrationSummary(pendingRegistrations), [pendingRegistrations])
 
-  const updateRegistrationStatus = (registrationId, nextStatus) => {
-    setRegistrations((current) =>
-      current.map((item) =>
-        item._id === registrationId
-          ? {
-              ...item,
-              status: nextStatus,
-            }
-          : item,
-      ),
-    )
-
-    setFeedbackMessage(
-      nextStatus === 'confirmed'
-        ? 'Approval state updated locally. Connect the backend approve endpoint next to make this action live.'
-        : 'Rejection state updated locally. Connect the backend reject endpoint next to make this action live.',
-    )
+  const updateRegistrationStatus = async (registrationId, nextStatus) => {
+    try {
+      setActionLoading(registrationId)
+      
+      if (nextStatus === 'confirmed') {
+        await approveRegistration(registrationId)
+        setFeedbackMessage('Registration approved successfully!')
+      } else {
+        await rejectRegistration(registrationId)
+        setFeedbackMessage('Registration rejected.')
+      }
+      
+      setFeedbackType('success')
+      
+      // Update local state
+      setRegistrations((current) =>
+        current.map((item) =>
+          item._id === registrationId
+            ? { ...item, status: nextStatus }
+            : item,
+        ),
+      )
+    } catch (error) {
+      setFeedbackMessage(
+        getApiErrorMessage(error, `Failed to ${nextStatus === 'confirmed' ? 'approve' : 'reject'} registration.`),
+      )
+      setFeedbackType('error')
+    } finally {
+      setActionLoading(null)
+    }
   }
 
   return (
@@ -56,7 +99,9 @@ function ApprovalRequestsPage() {
       description="Handle pending registrations with a focused approval queue so your team can confirm access quickly and keep attendee communication clean."
     >
       <div className="organizer-page">
-        {feedbackMessage ? <Alert severity="success" className="organizer-page__feedback">{feedbackMessage}</Alert> : null}
+        {feedbackMessage ? <Alert severity={feedbackType} className="organizer-page__feedback">{feedbackMessage}</Alert> : null}
+
+        {isLoading && !event ? <CircularProgress /> : null}
 
         {event ? (
           <>
@@ -65,12 +110,17 @@ function ApprovalRequestsPage() {
             {rows.length ? (
               <div className="organizer-page__panel">
                 <Typography className="organizer-page__panel-title">Pending approvals for {event.title}</Typography>
-                <RegistrationTable
-                  rows={rows}
-                  showActions
-                  onApprove={(registrationId) => updateRegistrationStatus(registrationId, 'confirmed')}
-                  onReject={(registrationId) => updateRegistrationStatus(registrationId, 'cancelled')}
-                />
+                {isLoading && !rows.length ? (
+                  <CircularProgress />
+                ) : (
+                  <RegistrationTable
+                    rows={rows}
+                    showActions
+                    actionLoading={actionLoading}
+                    onApprove={(registrationId) => updateRegistrationStatus(registrationId, 'confirmed')}
+                    onReject={(registrationId) => updateRegistrationStatus(registrationId, 'cancelled')}
+                  />
+                )}
               </div>
             ) : (
               <div className="organizer-page__empty">
@@ -85,7 +135,7 @@ function ApprovalRequestsPage() {
           <div className="organizer-page__empty">
             <Typography className="organizer-page__empty-title">Approval queue unavailable</Typography>
             <Typography className="organizer-page__empty-text">
-              This event could not be loaded from the current organizer dataset. Once live backend approval routes are available, this page can fetch real pending requests.
+              This event could not be found. Please check the event ID and try again.
             </Typography>
           </div>
         )}
