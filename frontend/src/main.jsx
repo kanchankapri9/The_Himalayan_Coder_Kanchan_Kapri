@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { AuthProvider } from './context/AuthContext'
 import { SavedEventsProvider } from './context/SavedEventsContext'
-import { AuthProvider } from './context/AuthContext'
 import { ThemeModeProvider } from './context/ThemeModeContext'
 import './styles/global.css'
 
