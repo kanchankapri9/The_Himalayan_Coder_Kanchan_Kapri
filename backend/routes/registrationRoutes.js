@@ -5,6 +5,10 @@ const {
   createOne,
   updateOne,
   deleteOne,
+  getMyRegistrations,
+  getRegistrationsByEvent,
+  approveRegistration,
+  rejectRegistration,
 } = require("../controllers/registrationController");
 const { uploadSingle } = require("../middleware/uploadMiddleware");
 const { protect } = require("../middleware/authMiddleware");
@@ -20,6 +24,37 @@ const {
 const { enforceRegistrationDomainRules } = require("../middleware/domainValidationMiddleware");
 
 const router = express.Router();
+
+router
+  .route("/my")
+  .get(protect, getMyRegistrations);
+
+router
+  .route("/event/:eventId")
+  .get(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    validateObjectId("eventId"),
+    getRegistrationsByEvent
+  );
+
+router
+  .route("/:id/approve")
+  .patch(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    validateObjectId("id"),
+    approveRegistration
+  );
+
+router
+  .route("/:id/reject")
+  .patch(
+    protect,
+    authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+    validateObjectId("id"),
+    rejectRegistration
+  );
 
 // Registration CRUD endpoints
 router
