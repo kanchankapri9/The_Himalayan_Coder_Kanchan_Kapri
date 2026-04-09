@@ -87,9 +87,9 @@ We developed a smart system that leverages modern technologies to provide effici
 
 | Resource | Link |
 |---------|------|
-|  Presentation |  |
-|  GitHub Repo |  |
-|  Demo Video | |
+|  Presentation | https://drive.google.com/file/d/1zQuMPQK9kJzMXU9U03Y82VNxOhp0TzVa/view?usp=sharing|
+|  GitHub Repo |  https://github.com/kanchankapri9/The_Himalayan_Coder_Kanchan_Kapri  |
+|  Demo Video | https://drive.google.com/file/d/1zQuMPQK9kJzMXU9U03Y82VNxOhp0TzVa/view?usp=sharing|
 
 ---
 
