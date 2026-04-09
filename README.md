@@ -46,34 +46,6 @@ We developed a smart system that leverages modern technologies to provide effici
 
 ---
 
-### Backend Setup & Running
-
-1. **Install dependencies**:
-   ```bash
-   cd backend
-   npm install
-   ```
-
-2. **Configure environment**:
-   - Copy `backend/.env.example` to `backend/.env`
-   - Fill in your values:
-     - `MONGO_URI`: MongoDB connection string (local or Atlas)
-     - `JWT_SECRET`: A strong random secret (32+ characters)
-     - `CLOUDINARY_*`: Image hosting credentials (sign up at cloudinary.com)
-     - `PORT`: Server port (default 5000)
-
-3. **Start the server**:
-   ```bash
-   npm run dev
-   ```
-   Server will run on `http://localhost:5000`. Confirm with GET `/` returning `API is running...`.
-
-4. **Test the API**:
-   - Use the Hoppscotch flow guide: `backend/docs/postman/hoppscotch-flow-guide.md`
-   - Or import the Postman collection: `backend/postman/FestFlow.postman_collection.json`
-
----
-
 ###  Key Features
 
 - 🔹 Feature 1 –  Location-Based Event Discovery – Find events happening nearby
