@@ -5,12 +5,15 @@ const {
   createOne,
   updateOne,
   deleteOne,
+  getMyPasses,
 } = require("../controllers/passController");
 const { protect } = require("../middleware/authMiddleware");
 const { authorizeRoles, USER_ROLES } = require("../middleware/roleMiddleware");
 const { validateObjectId } = require("../middleware/validateMiddleware");
 
 const router = express.Router();
+
+router.route("/my").get(protect, getMyPasses);
 
 // Pass CRUD endpoints
 router

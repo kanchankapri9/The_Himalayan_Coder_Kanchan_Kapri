@@ -2,7 +2,7 @@ const { USER_ROLES } = require("../constants/enums");
 
 // Restrict route access based on logged-in user's role.
 // Usage: authorizeRoles("admin") or authorizeRoles("organizer", "admin")
-const authorizeRoles = (...allowedRoles) => {
+const authorizeRoles = (...allowedRoles) => {  
   return (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({

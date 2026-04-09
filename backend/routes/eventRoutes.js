@@ -5,6 +5,7 @@ const {
 	createOne,
 	updateOne,
 	deleteOne,
+	getMyEvents,
 } = require("../controllers/eventController");
 const { uploadSingle } = require("../middleware/uploadMiddleware");
 const { protect } = require("../middleware/authMiddleware");
@@ -17,6 +18,14 @@ const { validateObjectId, validateEventPayload } = require("../middleware/valida
 const { enforceEventDomainRules } = require("../middleware/domainValidationMiddleware");
 
 const router = express.Router();
+
+router
+	.route("/my")
+	.get(
+		protect,
+		authorizeRoles(USER_ROLES.ORGANIZER, USER_ROLES.ADMIN),
+		getMyEvents
+	);
 
 // GET /api/events -> list all events (supports pagination/search via query params)
 // POST /api/events -> create new event
