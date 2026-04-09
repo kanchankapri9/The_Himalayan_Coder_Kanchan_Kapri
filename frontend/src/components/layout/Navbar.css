@@ -64,6 +64,12 @@
   font-weight: 600 !important;
 }
 
+.navbar__user-name {
+  color: var(--color-heading);
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
 @media (max-width: 640px) {
   .navbar__toolbar {
     min-height: 66px;

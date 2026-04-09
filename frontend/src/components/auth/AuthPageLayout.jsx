@@ -12,11 +12,6 @@ function AuthPageLayout({ children, badgeText, heading, subText }) {
               <span className="auth-layout__brand-dot" />
               <span>FestFlow</span>
             </Link>
-
-            <div className="auth-layout__links">
-              <Link to="/">Home</Link>
-              <Link to="/register">Join</Link>
-            </div>
           </div>
 
           <div className="auth-layout__main">

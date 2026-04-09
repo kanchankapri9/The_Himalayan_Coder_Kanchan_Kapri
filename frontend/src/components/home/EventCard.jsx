@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import './EventCard.css'
 
-function EventCard({ slug, image, date, title, location, price }) {
+function EventCard({ _id, image, date, title, location, price }) {
   return (
     <article className="event-card">
       <Link
-        to={`/events/${slug}`}
+        to={`/events/${_id}`}
         className="event-card__overlay-link"
         aria-label={`Open details for ${title}`}
       />

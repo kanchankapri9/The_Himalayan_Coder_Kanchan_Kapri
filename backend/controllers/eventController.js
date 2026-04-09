@@ -1,4 +1,6 @@
 const Event = require("../models/Event");
+require("../models/OrganizerProfile");
+require("../models/Venue");
 const { createCrudController } = require("../utils/controllerFactory");
 
 // Event controller powers event creation, listing, details, update, and delete flows.
