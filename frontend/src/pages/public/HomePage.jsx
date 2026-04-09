@@ -1,14 +1,10 @@
+import { useEffect, useState } from 'react'
+import { Alert, CircularProgress } from '@mui/material'
 import HomeHero from '../../components/home/HomeHero'
 import QuickCategories from '../../components/home/QuickCategories'
 import EventShowcaseSection from '../../components/home/EventShowcaseSection'
-import CollectionGrid from '../../components/home/CollectionGrid'
 import OrganizerBanner from '../../components/home/OrganizerBanner'
 import InterestGrid from '../../components/home/InterestGrid'
-<<<<<<< Updated upstream
-import './LandingPage.css'
-
-function HomePage() {
-=======
 import { fetchEvents } from '../../api/eventApi'
 import { events as mockEvents } from '../../data/events'
 import { getApiErrorMessage } from '../../utils/apiError'
@@ -39,26 +35,17 @@ function HomePage() {
     loadEvents()
   }, [])
 
->>>>>>> Stashed changes
   return (
     <div className="landing-page">
       <HomeHero />
       <QuickCategories />
-<<<<<<< Updated upstream
-=======
-      {errorMessage && <Alert severity="warning">{errorMessage}</Alert>}
-      {isLoading && !events.length && <CircularProgress />}
->>>>>>> Stashed changes
+      {errorMessage ? <Alert severity="warning">{errorMessage}</Alert> : null}
+      {isLoading && !events.length ? <CircularProgress /> : null}
       <EventShowcaseSection
         label="Trending events in your area"
         title="Events students are booking now"
+        items={events}
       />
-      {/* <CollectionGrid />
-      <EventShowcaseSection
-        label="This weekend"
-        title="Plan your next fest, pop-up, or meetup"
-        compact
-      /> */}
       <InterestGrid />
       <OrganizerBanner />
     </div>

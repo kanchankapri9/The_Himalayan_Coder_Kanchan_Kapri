@@ -1,14 +1,10 @@
-<<<<<<< Updated upstream
-=======
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
->>>>>>> Stashed changes
 import AuthForm from '../../components/auth/AuthForm'
 import AuthPageLayout from '../../components/auth/AuthPageLayout'
+import { useAuth } from '../../context/AuthContext'
 
 function RegisterPage() {
-<<<<<<< Updated upstream
-=======
   const navigate = useNavigate()
   const location = useLocation()
   const { register } = useAuth()
@@ -34,14 +30,13 @@ function RegisterPage() {
     }
   }
 
->>>>>>> Stashed changes
   return (
     <AuthPageLayout
       badgeText="Start for free"
       heading="Create your FestFlow account."
       subText="Set up your account to explore events, save favorites, and get QR passes after registration."
     >
-      <AuthForm mode="register" />
+      <AuthForm mode="register" onSubmit={handleRegister} isSubmitting={isSubmitting} serverError={serverError} />
     </AuthPageLayout>
   )
 }

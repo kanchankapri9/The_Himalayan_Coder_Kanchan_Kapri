@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material'
 import './PassHeroCard.css'
 
-function PassHeroCard({ pass, onAddToCalendar }) {
+function PassHeroCard({ pass, onAddToCalendar, onDownloadPass }) {
   return (
     <section className="pass-hero-card">
       <div className="pass-hero-card__content">
@@ -16,7 +16,7 @@ function PassHeroCard({ pass, onAddToCalendar }) {
         </Typography>
 
         <div className="pass-hero-card__actions">
-          <Button variant="contained" className="pass-hero-card__button">
+          <Button variant="contained" className="pass-hero-card__button" onClick={onDownloadPass}>
             Download pass
           </Button>
           <Button variant="outlined" className="pass-hero-card__button" onClick={onAddToCalendar}>

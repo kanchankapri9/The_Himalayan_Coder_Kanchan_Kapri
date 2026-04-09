@@ -2,11 +2,13 @@ import { Link, useLocation } from 'react-router-dom'
 import { AppBar, Button, Container, IconButton, Stack, Toolbar, Typography } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { useAuth } from '../../context/AuthContext'
 import { useThemeMode } from '../../context/ThemeModeContext'
 import './Navbar.css'
 
 function Navbar() {
   const location = useLocation()
+  const { user, isAuthenticated, logout } = useAuth()
   const { mode, toggleMode } = useThemeMode()
   const isLandingPage = location.pathname === '/'
   const isHomePage = location.pathname === '/home'
@@ -30,36 +32,13 @@ function Navbar() {
               <FontAwesomeIcon icon={mode === 'dark' ? faSun : faMoon} />
             </IconButton>
 
-          {isLandingPage && (
-            <Button variant="contained" component={Link} to="/home" className="navbar__button">
-              Get Started
-            </Button>
-          )}
+            {isLandingPage && !isAuthenticated ? (
+              <Button variant="contained" component={Link} to="/home" className="navbar__button">
+                Get Started
+              </Button>
+            ) : null}
 
-          {isHomePage && (
-            <Stack direction="row" spacing={1.2}>
-              <Button variant="text" component={Link} to="/login" className="navbar__text-button">
-                Log in
-              </Button>
-              <Button variant="contained" component={Link} to="/register" className="navbar__button">
-                Sign up
-              </Button>
-            </Stack>
-          )}
-
-<<<<<<< Updated upstream
-          {!isLandingPage && !isHomePage && (
-            <Stack direction="row" spacing={1.2}>
-              <Button variant="text" component={Link} to="/home" className="navbar__text-button">
-                Home
-              </Button>
-              <Button variant="contained" component={Link} to="/register" className="navbar__button">
-                Sign up
-              </Button>
-            </Stack>
-          )}
-=======
-            {isHomePage && !isAuthenticated && (
+            {isHomePage && !isAuthenticated ? (
               <Stack direction="row" spacing={1.2}>
                 <Button variant="text" component={Link} to="/login" className="navbar__text-button">
                   Log in
@@ -68,9 +47,9 @@ function Navbar() {
                   Sign up
                 </Button>
               </Stack>
-            )}
+            ) : null}
 
-            {!isLandingPage && !isHomePage && !isAuthenticated && (
+            {!isLandingPage && !isHomePage && !isAuthenticated ? (
               <Stack direction="row" spacing={1.2}>
                 <Button variant="text" component={Link} to="/home" className="navbar__text-button">
                   Home
@@ -79,11 +58,11 @@ function Navbar() {
                   Sign up
                 </Button>
               </Stack>
-            )}
+            ) : null}
 
-            {isAuthenticated && (
+            {isAuthenticated ? (
               <Stack direction="row" spacing={1.2} alignItems="center">
-                {isAttendee && (
+                {isAttendee ? (
                   <>
                     <Button variant="text" component={Link} to="/attendee/registrations" className="navbar__text-button">
                       Dashboard
@@ -92,8 +71,9 @@ function Navbar() {
                       Passes
                     </Button>
                   </>
-                )}
-                {isOrganizer && (
+                ) : null}
+
+                {isOrganizer ? (
                   <>
                     <Button variant="text" component={Link} to="/organizer" className="navbar__text-button">
                       Dashboard
@@ -102,14 +82,14 @@ function Navbar() {
                       My Events
                     </Button>
                   </>
-                )}
+                ) : null}
+
                 <Typography className="navbar__user-name">{user?.name}</Typography>
                 <Button variant="text" onClick={logout} className="navbar__text-button">
                   Logout
                 </Button>
               </Stack>
-            )}
->>>>>>> Stashed changes
+            ) : null}
           </div>
         </Toolbar>
       </Container>

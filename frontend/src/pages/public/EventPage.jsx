@@ -1,20 +1,13 @@
-import { Link, useParams } from 'react-router-dom'
-import { Button, Divider, Stack, Typography } from '@mui/material'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Alert, Button, CircularProgress, Divider, Stack, Typography } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCalendarDays,
   faLocationDot,
-  faUserGroup,
   faTicket,
+  faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
-<<<<<<< Updated upstream
-import { getEventBySlug } from '../../data/events'
-import './EventPage.css'
-
-function EventPage() {
-  const { slug } = useParams()
-  const event = getEventBySlug(slug)
-=======
 import { fetchEventById } from '../../api/eventApi'
 import { createRegistration } from '../../api/registrationApi'
 import { fetchTickets } from '../../api/ticketApi'
@@ -34,32 +27,32 @@ function EventPage() {
   const [errorMessage, setErrorMessage] = useState('')
   const [actionMessage, setActionMessage] = useState('')
   const [isRegistering, setIsRegistering] = useState(false)
+  const [selectedTicketId, setSelectedTicketId] = useState('')
+  const [bookingSuccess, setBookingSuccess] = useState(null)
 
   useEffect(() => {
     const loadEventPageData = async () => {
       try {
         setIsLoading(true)
 
-        const [eventResponse, ticketResponse] = await Promise.all([
-          fetchEventById(id),
-          fetchTickets(),
-        ])
-
-        setRawEvent(eventResponse.data)
+        const [eventResponse, ticketResponse] = await Promise.all([fetchEventById(id), fetchTickets()])
         const matchedTickets = (ticketResponse.data || []).filter((ticket) => {
-          const ticketEventId =
-            typeof ticket.event === 'string' ? ticket.event : ticket.event?._id
-
+          const ticketEventId = typeof ticket.event === 'string' ? ticket.event : ticket.event?._id
           return ticketEventId === id
         })
+
+        setRawEvent(eventResponse.data)
         setEventTickets(matchedTickets)
+        setSelectedTicketId((current) => current || matchedTickets[0]?._id || '')
         setErrorMessage('')
       } catch (error) {
         const fallbackEvent = getEventById(id)
 
         if (fallbackEvent) {
+          const fallbackTickets = getTicketsByEventId(id)
           setRawEvent(fallbackEvent)
-          setEventTickets(getTicketsByEventId(id))
+          setEventTickets(fallbackTickets)
+          setSelectedTicketId((current) => current || fallbackTickets[0]?._id || '')
           setErrorMessage(
             `${getApiErrorMessage(error, 'Could not load the live event details right now.')} Showing demo event data instead.`,
           )
@@ -84,18 +77,25 @@ function EventPage() {
     return mapEventForDetails(rawEvent, eventTickets)
   }, [rawEvent, eventTickets])
 
+  const selectedTicket = useMemo(() => {
+    if (!eventTickets.length) {
+      return null
+    }
+
+    return eventTickets.find((ticket) => ticket._id === selectedTicketId) || eventTickets[0]
+  }, [eventTickets, selectedTicketId])
+
   const handleRegister = async () => {
     if (!isAuthenticated) {
       navigate('/login', { state: { from: location.pathname } })
       return
     }
 
-    if (!eventTickets.length) {
+    if (!selectedTicket) {
       setActionMessage('No tickets are available for this event yet.')
       return
     }
 
-    const selectedTicket = eventTickets[0]
     const registrationNumber = `REG-${Date.now()}`
 
     try {
@@ -117,6 +117,11 @@ function EventPage() {
         },
       })
 
+      setBookingSuccess({
+        title: rawEvent.title,
+        registrationNumber,
+        ticketName: selectedTicket.name,
+      })
       setActionMessage('Registration created successfully. Your booking is now recorded in the backend.')
     } catch (error) {
       setActionMessage(error.response?.data?.message || 'Failed to create registration.')
@@ -124,7 +129,10 @@ function EventPage() {
       setIsRegistering(false)
     }
   }
->>>>>>> Stashed changes
+
+  if (isLoading && !event) {
+    return <CircularProgress />
+  }
 
   if (!event) {
     return (
@@ -142,12 +150,31 @@ function EventPage() {
 
   return (
     <section className="event-page">
-<<<<<<< Updated upstream
-=======
-      {errorMessage && <Alert severity="warning">{errorMessage}</Alert>}
-      {actionMessage && <Alert severity={actionMessage.includes('successfully') ? 'success' : 'info'}>{actionMessage}</Alert>}
-      {isLoading && !event && <CircularProgress />}
->>>>>>> Stashed changes
+      {errorMessage ? <Alert severity="warning">{errorMessage}</Alert> : null}
+      {actionMessage ? (
+        <Alert severity={actionMessage.includes('successfully') ? 'success' : 'info'}>{actionMessage}</Alert>
+      ) : null}
+
+      {bookingSuccess ? (
+        <div className="event-page__success-card">
+          <div>
+            <Typography className="event-page__success-title">Booking confirmed for {bookingSuccess.title}</Typography>
+            <Typography className="event-page__success-text">
+              Registration {bookingSuccess.registrationNumber} is recorded with the selected {bookingSuccess.ticketName}.
+              You can now track it from your attendee dashboard.
+            </Typography>
+          </div>
+          <div className="event-page__success-actions">
+            <Button component={Link} to="/attendee/registrations" variant="contained">
+              My registrations
+            </Button>
+            <Button component={Link} to="/attendee/passes" variant="outlined">
+              View passes
+            </Button>
+          </div>
+        </div>
+      ) : null}
+
       <div className="event-page__hero">
         <div className="event-page__hero-image" style={{ backgroundImage: `url(${event.image})` }} />
         <div className="event-page__hero-overlay" />
@@ -163,7 +190,7 @@ function EventPage() {
             <FontAwesomeIcon icon={faLocationDot} /> {event.venue}
           </Typography>
           <Typography className="event-page__hero-meta">
-            <FontAwesomeIcon icon={faUserGroup} /> By {event.organizer}
+            <FontAwesomeIcon icon={faUserGroup} /> By {event.organizerName}
           </Typography>
         </div>
       </div>
@@ -176,8 +203,7 @@ function EventPage() {
             </Typography>
             <Typography className="event-page__body-text">{event.about}</Typography>
             <Typography className="event-page__body-text">
-              FestFlow event pages are built to help attendees understand the vibe,
-              timing, venue, and ticket structure clearly before they register.
+              FestFlow event pages are built to help attendees understand the vibe, timing, venue, and ticket structure clearly before they register.
             </Typography>
           </div>
 
@@ -217,9 +243,9 @@ function EventPage() {
               Organizer
             </Typography>
             <div className="event-page__organizer-card">
-              <div className="event-page__organizer-avatar">{event.organizer.charAt(0)}</div>
+              <div className="event-page__organizer-avatar">{event.organizerName.charAt(0)}</div>
               <div>
-                <Typography className="event-page__organizer-name">{event.organizer}</Typography>
+                <Typography className="event-page__organizer-name">{event.organizerName}</Typography>
                 <Typography className="event-page__organizer-meta">
                   {event.attendees} • Event by local campus team
                 </Typography>
@@ -234,26 +260,46 @@ function EventPage() {
               <FontAwesomeIcon icon={faTicket} /> Tickets
             </Typography>
             <Typography variant="h3" className="event-page__ticket-price">
-              {event.price}
+              {selectedTicket ? (selectedTicket.price === 0 ? 'Free' : `Rs. ${selectedTicket.price}`) : event.price}
             </Typography>
             <Typography className="event-page__ticket-note">
-              Reserve your seat and get your QR pass after login and registration.
+              Pick the ticket that matches the experience you want, then continue with registration. Your QR pass will appear after confirmation.
             </Typography>
 
             <Stack spacing={1.1} className="event-page__ticket-list">
               {event.tickets.map((ticket) => (
-                <div key={ticket.name} className="event-page__ticket-row">
+                <button
+                  type="button"
+                  key={ticket.id || ticket.name}
+                  className={`event-page__ticket-row${selectedTicket?._id === ticket.id ? ' event-page__ticket-row--active' : ''}`}
+                  onClick={() => setSelectedTicketId(ticket.id)}
+                >
                   <div>
                     <Typography className="event-page__ticket-name">{ticket.name}</Typography>
                     <Typography className="event-page__ticket-subtext">{ticket.note}</Typography>
                   </div>
                   <Typography className="event-page__ticket-amount">{ticket.price}</Typography>
-                </div>
+                </button>
               ))}
             </Stack>
 
-            <Button component={Link} to="/login" variant="contained" className="event-page__primary-button">
-              Register now
+            {selectedTicket ? (
+              <div className="event-page__selected-ticket">
+                <Typography className="event-page__selected-label">Selected ticket</Typography>
+                <Typography className="event-page__selected-name">{selectedTicket.name}</Typography>
+                <Typography className="event-page__selected-text">
+                  {selectedTicket.description || 'Ticket details will be shared after booking confirmation.'}
+                </Typography>
+              </div>
+            ) : null}
+
+            <Button
+              onClick={handleRegister}
+              variant="contained"
+              className="event-page__primary-button"
+              disabled={isRegistering}
+            >
+              {selectedTicket ? `Register for ${selectedTicket.name}` : 'Register now'}
             </Button>
             <Button component={Link} to="/register" variant="outlined" className="event-page__secondary-button">
               Create account

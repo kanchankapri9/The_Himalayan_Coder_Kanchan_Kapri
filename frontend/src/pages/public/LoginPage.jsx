@@ -1,9 +1,10 @@
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AuthForm from '../../components/auth/AuthForm'
 import AuthPageLayout from '../../components/auth/AuthPageLayout'
+import { useAuth } from '../../context/AuthContext'
 
 function LoginPage() {
-<<<<<<< Updated upstream
-=======
   const navigate = useNavigate()
   const location = useLocation()
   const { login } = useAuth()
@@ -29,14 +30,13 @@ function LoginPage() {
     }
   }
 
->>>>>>> Stashed changes
   return (
     <AuthPageLayout
       badgeText="Welcome back"
       heading="Log in and jump back in."
       subText="Continue exploring local fests, track your registrations, and manage event check-ins from your dashboard."
     >
-      <AuthForm mode="login" />
+      <AuthForm mode="login" onSubmit={handleLogin} isSubmitting={isSubmitting} serverError={serverError} />
     </AuthPageLayout>
   )
 }

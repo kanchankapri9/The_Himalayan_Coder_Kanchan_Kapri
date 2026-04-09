@@ -6,6 +6,8 @@ import AttendeeShell from '../../components/attendee/AttendeeShell'
 import PassHeroCard from '../../components/attendee/PassHeroCard'
 import { getApiErrorMessage } from '../../utils/apiError'
 import { getMockPassById, mapPassForDetails } from '../../data/attendee'
+import { downloadEventCalendarFile } from '../../utils/calendar'
+import { downloadPassFile } from '../../utils/passDownload'
 import './AttendeePages.css'
 
 function PassDetailsPage() {
@@ -68,7 +70,20 @@ function PassDetailsPage() {
           <>
             <PassHeroCard
               pass={pass}
-              onAddToCalendar={() => setActionMessage('Calendar support will be wired to the real event schedule in the next phase.')}
+              onAddToCalendar={() => {
+                downloadEventCalendarFile({
+                  title: pass.title,
+                  description: `FestFlow event pass for ${pass.attendeeName}`,
+                  location: pass.location,
+                  startDate: passRecord.event?.startDate,
+                  endDate: passRecord.event?.endDate,
+                })
+                setActionMessage('Calendar file downloaded successfully.')
+              }}
+              onDownloadPass={() => {
+                downloadPassFile(pass)
+                setActionMessage('Pass file downloaded successfully.')
+              }}
             />
 
             <div className="attendee-page__details-grid">
