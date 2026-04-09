@@ -9,8 +9,17 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Middleware - CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://your-frontend-domain.com' 
+    : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Route modules (each feature has its own route file).

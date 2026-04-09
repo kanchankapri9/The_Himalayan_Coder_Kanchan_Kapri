@@ -14,3 +14,8 @@ export async function getCurrentUser() {
   const response = await apiClient.get('/auth/me')
   return response.data
 }
+
+export async function logout() {
+  // Clear token from localStorage (handled on frontend)
+  return { success: true }
+}
