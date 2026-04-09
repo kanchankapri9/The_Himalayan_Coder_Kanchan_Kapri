@@ -302,6 +302,16 @@ npm install
 npm run dev
 ```
 
+### Configure API URL
+
+Create or update `frontend/.env`:
+
+```bash
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+This frontend now expects the backend server to run on port `5000` by default.
+
 ### Create production build
 
 ```bash
@@ -316,19 +326,22 @@ npm run build
 - global theme added
 - navbar created
 - footer created
-- homepage created
-- explore page created
-- login UI created
-- register UI created
+- landing page created
+- home page created and connected to live events API
+- event details page created and connected to live event API
+- login UI created and connected to backend auth
+- register UI created and connected to backend auth
+- dark/light theme toggle added
 - component-wise CSS structure started
+- frontend API base URL setup added with `.env.example`
 
 ## What You Should Build Next
 
 The best next frontend step is:
 
-1. create `event details page`
-2. create `attendee dashboard layout`
-3. create `organizer dashboard layout`
-4. add dummy data files for events
+1. create `attendee dashboard layout`
+2. create `my registrations` page
+3. create `saved events` page
+4. create `organizer dashboard layout`
 
 That will move you smoothly into Phase 2 and Phase 3.

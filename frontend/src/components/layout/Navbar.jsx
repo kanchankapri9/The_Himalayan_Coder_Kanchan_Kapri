@@ -10,6 +10,8 @@ function Navbar() {
   const { mode, toggleMode } = useThemeMode()
   const isLandingPage = location.pathname === '/'
   const isHomePage = location.pathname === '/home'
+  const isAttendee = user?.role === 'attendee'
+  const isOrganizer = user?.role === 'organizer'
 
   return (
     <AppBar position="sticky" elevation={0} className="navbar">
@@ -45,6 +47,7 @@ function Navbar() {
             </Stack>
           )}
 
+<<<<<<< Updated upstream
           {!isLandingPage && !isHomePage && (
             <Stack direction="row" spacing={1.2}>
               <Button variant="text" component={Link} to="/home" className="navbar__text-button">
@@ -55,6 +58,58 @@ function Navbar() {
               </Button>
             </Stack>
           )}
+=======
+            {isHomePage && !isAuthenticated && (
+              <Stack direction="row" spacing={1.2}>
+                <Button variant="text" component={Link} to="/login" className="navbar__text-button">
+                  Log in
+                </Button>
+                <Button variant="contained" component={Link} to="/register" className="navbar__button">
+                  Sign up
+                </Button>
+              </Stack>
+            )}
+
+            {!isLandingPage && !isHomePage && !isAuthenticated && (
+              <Stack direction="row" spacing={1.2}>
+                <Button variant="text" component={Link} to="/home" className="navbar__text-button">
+                  Home
+                </Button>
+                <Button variant="contained" component={Link} to="/register" className="navbar__button">
+                  Sign up
+                </Button>
+              </Stack>
+            )}
+
+            {isAuthenticated && (
+              <Stack direction="row" spacing={1.2} alignItems="center">
+                {isAttendee && (
+                  <>
+                    <Button variant="text" component={Link} to="/attendee/registrations" className="navbar__text-button">
+                      Dashboard
+                    </Button>
+                    <Button variant="text" component={Link} to="/attendee/passes" className="navbar__text-button">
+                      Passes
+                    </Button>
+                  </>
+                )}
+                {isOrganizer && (
+                  <>
+                    <Button variant="text" component={Link} to="/organizer" className="navbar__text-button">
+                      Dashboard
+                    </Button>
+                    <Button variant="text" component={Link} to="/organizer/events" className="navbar__text-button">
+                      My Events
+                    </Button>
+                  </>
+                )}
+                <Typography className="navbar__user-name">{user?.name}</Typography>
+                <Button variant="text" onClick={logout} className="navbar__text-button">
+                  Logout
+                </Button>
+              </Stack>
+            )}
+>>>>>>> Stashed changes
           </div>
         </Toolbar>
       </Container>

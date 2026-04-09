@@ -11,7 +11,11 @@ function EventShowcaseSection({ label, title, compact = false }) {
       <Grid container spacing={2}>
         {events.map((event) => (
           <Grid key={`${title}-${event.title}`} size={{ xs: 12, sm: 6, lg: 3 }}>
+<<<<<<< Updated upstream
             <EventCard {...event} />
+=======
+            <EventCard event={event} {...mapEventForCard(event)} />
+>>>>>>> Stashed changes
           </Grid>
         ))}
       </Grid>
